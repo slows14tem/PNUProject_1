@@ -1,6 +1,10 @@
 import React from "react";
 import { useEffect, useState, useContext, useRef } from "react";
 import { AppContext } from "./SelectDate";
+import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import Button from 'react-bootstrap/Button';
 import "../style/lead.css";
 // import { useNavigate } from "react-router-dom";
@@ -158,7 +162,10 @@ const Lead = () => {
 
   return (
     <>
+    <Container>
       {/* <fieldset className="fieldBox"> */}
+      <Row>
+      <Col>
         <label className="label" for="choice"> Order To </label>
         <input className="input"></input>
         <label className="label" for="choice"> MACHINERY </label>
@@ -177,12 +184,17 @@ const Lead = () => {
         <input type='date' className="input" ref={refDateIn} onChange={handleChange}/>
         <label className="label" for="choice"> Qty </label>
         <input className="input"></input>
+      </Col>
+      <Col>
         <Button variant="dark" className="butt" onClick={submitdata}>Submit</Button>
+      </Col>
+      </Row>
         {/* <button className="butt" onClick={submitdata}>submit</button> */}
         {/* <button type="submit" onClick={goUrl}>
             submit
           </button> */}
       {/* </fieldset> */}
+      </Container>
     </>
   );
 };

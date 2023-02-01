@@ -2,26 +2,20 @@ import React, { useState, useContext, useEffect } from 'react';
 import { AppContext } from "./SelectDate";
 import Modal from 'react-modal';
 import Barchart from './BarChart';
+import Button from 'react-bootstrap/Button';
+import '../style/Modal.css'
 
 function MyModal(props){
   const [modalIsOpen, setModalIsOpen] = useState(false);
-  // const [lead, setLead] = useContext(AppContext);
-
   const [list, setList] = useState();
-  // const [machinery, setMachinery] = useState();
-  // const [items, setItems] = useState();
-  // const [part, setPart] = useState();
+  // props2={props['props']?.[0]['avg_leadtime']}
 
   const machinery = props['props']?.[0]['machinery']
   const items = props['props']?.[0]['items']
   const part1 = props['props']?.[0]['part1']
 
   useEffect(()=>{
-    // setMachinery(props['props']?.[0]['machinery'])
-    // setItems(props['props']?.[0]['items'])
-    // setPart(props['props']?.[0]['part1'])
     getPastLeadtime();
-
   },[props])
 
   const getPastLeadtime = async () => {
@@ -31,13 +25,12 @@ function MyModal(props){
     try {
       const resp = await fetch(url);
       const data = await resp.json();
+      data.predicted_leadtime = props['props']?.[0]['avg_leadtime']
       setList(data)
     } catch (err) {
       console.log(err);
     }
   }
-
-  // console.log("load", machinery,items, part)
 
   const customStyles = {
     content: {
@@ -50,11 +43,9 @@ function MyModal(props){
     },
   };
 
-  
-
   return(
     <>
-      <button onClick={() => setModalIsOpen(true)}>Modal Open</button>
+      <Button className='butt2' variant="dark" onClick={() => setModalIsOpen(true)}>시각화</Button>
 	    <Modal isOpen={modalIsOpen} 
         onRequestClose={() => setModalIsOpen(false)} 
         ariaHideApp={false} 

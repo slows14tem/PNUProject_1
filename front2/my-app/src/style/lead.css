@@ -66,6 +66,8 @@ select:disabled {
 }
 
 .butt{
-  margin-top: 15px;
-  margin-left: 160px;
+  height: 100%;
+  margin-left: 5px;
+  /* margin-top: 15px;
+  margin-left: 160px; */
 }

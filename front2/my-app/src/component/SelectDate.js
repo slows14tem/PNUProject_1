@@ -21,9 +21,12 @@ function SelectDate() {
 
   const [lead, setLead] = useState();
   const [startDate, setStartDate] = useState();
+  const [visible, setVisible] = useState(true);
   useEffect(()=>{
-    setStartDate(lead?.[0]["order_date"])    
-  },[startDate])
+    setStartDate(lead?.[0]["order_date"])
+    setVisible(!visible) 
+  },[lead])
+
 
 
   // 숫자만큼 선택한 날짜에서 더함
@@ -35,18 +38,17 @@ function SelectDate() {
   const d1 = [];
   // let a = 100;
   
-  let a = lead?.[0]["avg_leadtime"]
-  let t = a;
+  let a = startDate;
+  let b = lead?.[0]["avg_leadtime"];
+  let t = b;
 
-  for (let i = 0; i < a; i++) {
-    d1.push(addDays(startDate, i));
-  }
+  // for (let i = 0; i < a; i++) {
+  //   d1.push(addDays(startDate, i));
+  // }
 
   let y = parseInt(t / 365);
   let m = parseInt((t % 365) / 30);
   let d2 = parseInt((t % 365) % 30);
-
-
 
   return (
     <AppContext.Provider value={[lead, setLead]}>
@@ -82,15 +84,19 @@ function SelectDate() {
             }
           }}
         />
-        </Col>
-        <Col><MyModal props={lead} /></Col>
+        <br/>
+        {visible && <div>
+          예상 리드타임은 {`${y}year ${m}month ${d2}day`} 입니다.<br/>
+          발주일이 {moment(a).format("YYYY년 MM월 DD일")}이라면 <br/>
+          {moment(startDate).add(b, "days").format("YYYY년 MM월 DD일")}에 입고예정입니다.
+        </div>}
+        
+        <MyModal props={lead} />
+        </Col>        
       </Row>
+      {/* <Row><Col><MyModal props={lead} /></Col></Row> */}
     </Container>
-        <div>
-          {moment(d1[0]).format("YYYY년 MM월 DD일")}에서 {"    "}
-          {moment(d1[d1.length - 1]).format("YYYY년 MM월 DD일")}까지 입니다
-          <div>{`${y}year ${m}month ${d2}day`}</div>
-        </div>
+        
 
     </AppContext.Provider>
   );

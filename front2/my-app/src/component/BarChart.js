@@ -1,8 +1,11 @@
 import React, { useState, useContext, useEffect } from "react";
 import { ResponsiveBar } from "@nivo/bar";
+import Table from 'react-bootstrap/Table';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 function Barchart(props) {
   console.log(props['props'])
+  console.log(props['props']['predicted_leadtime'])
 
   const handle = {
     barClick: (data: any) => {
@@ -15,12 +18,48 @@ function Barchart(props) {
   };
 
   return (
-    // chart height이 100%이기 때문이 chart를 덮는 마크업 요소에 height 설정
+    <>
+    <Table striped bordered hover>
+      <thead>
+        <tr>
+          {/* <th>#</th> */}
+          <th>발주일</th>
+          <th>발주처</th>
+          <th>발주수량</th>
+          <th>견적단가</th>
+          <th>견적화폐</th>
+          <th>리드타임</th>
+        </tr>
+      </thead>
+      <tbody>
+        {props['props'].map((item) => (
+          <tr key={item.machinery+item.items}>
+            <td>{item.balju}</td>
+            <td>{item.baljucheo}</td>
+            <td>{item.baljusuryang}</td>
+            <td>{item.gyeonjeokdanga}</td>
+            <td>{item.gyeonjeokhwapye}</td>
+            <td>{item.leadtime}</td>
+          </tr>
+        ))}
+      </tbody>
+    </Table>
+    
     <div style={{ width: "800px", height: "500px", margin: "0 auto" }}>
       <ResponsiveBar
         /**
          * chart에 사용될 데이터
          */
+        // padding={0.4}
+        markers={[
+            {
+                axis: 'y',
+                value: props['props']['predicted_leadtime'],
+                lineStyle: { stroke: 'rgba(0, 0, 0, .35)', strokeWidth: 2 },
+                legend: `예상 리드타임: ${props['props']['predicted_leadtime']}`,
+                legendOrientation: 'horizontal',
+            },
+        ]}
         data={props['props']}
         /**
          * chart에 보여질 데이터 key (측정되는 값)
@@ -29,7 +68,7 @@ function Barchart(props) {
         /**
          * keys들을 그룹화하는 index key (분류하는 값)
          */
-        indexBy="ship"
+        indexBy="balju"
         /**
          * chart margin
          */
@@ -73,7 +112,7 @@ function Barchart(props) {
              */
             legend: {
               text: {
-                fontSize: 20,
+                fontSize: 15,
                 fill: "#000000",
               },
             },
@@ -82,7 +121,7 @@ function Barchart(props) {
              */
             ticks: {
               text: {
-                fontSize: 16,
+                fontSize: 10,
                 fill: "#000000",
               },
             },
@@ -94,8 +133,8 @@ function Barchart(props) {
         axisBottom={{
           tickSize: 5, // 값 설명하기 위해 튀어나오는 점 크기
           tickPadding: 5, // tick padding
-          tickRotation: 0, // tick 기울기
-          legend: "ship", // bottom 글씨
+          tickRotation: 45, // tick 기울기
+          legend: "발주일", // bottom 글씨
           legendPosition: "middle", // 글씨 위치
           legendOffset: 40, // 글씨와 chart간 간격
         }}
@@ -106,9 +145,9 @@ function Barchart(props) {
           tickSize: 5, // 값 설명하기 위해 튀어나오는 점 크기
           tickPadding: 5, // tick padding
           tickRotation: 0, // tick 기울기
-          legend: "price", // left 글씨
+          legend: "leadtime", // left 글씨
           legendPosition: "middle", // 글씨 위치
-          legendOffset: -60, // 글씨와 chart간 간격
+          legendOffset: -50, // 글씨와 chart간 간격
         }}
         /**
          * label 안보이게 할 기준 width
@@ -153,6 +192,7 @@ function Barchart(props) {
         ]}
       />
     </div>
+    </>
   );
 };
 
