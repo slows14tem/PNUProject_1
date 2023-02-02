@@ -40,3 +40,9 @@ pycaret보다 상황이 좋아졌다.
 "저장을 하고."   
 
 "이런 것들을 함수로 만들어야 니가 짧은 시간에 많이 돌릴 수 있다"   
+
+- feature 해석
+![image](https://user-images.githubusercontent.com/113881813/216211144-04d629f2-10e5-42b3-a929-ce9f32077bc4.png)   
+Machinery는 명칭이다   
+Assembly - Machinery 안에 들어가는 부품   
+청구품목 - Assembly를 더 구체화한 거.   
