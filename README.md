@@ -8,6 +8,14 @@ feature = machinery, assembly, 청구품목, part1을 바탕으로 pycaret 돌�
 
 가장 정확도가 잘 나오는 모델은 ridge classifier라고 한다
 
+- 분류7트_테스트용.ipynb
+위에서 저장한 모델을 db에 넣기 위해 만든 파일   
+![image](https://user-images.githubusercontent.com/113881813/216206812-50609367-5274-4850-8e9f-02052a123765.png)   
+불러와서   
+![image](https://user-images.githubusercontent.com/113881813/216206850-d3413725-3397-4c4b-a2f7-2de3a5599838.png)   
+로드하고   
+![image](https://user-images.githubusercontent.com/113881813/216206904-e54ec8d5-e278-4a7b-b4c2-25d3fa808497.png)   
+넣는다.   
 
 
 카테고리를 맞추기 위한 feature로 subject, 'machinery'  , 'assembly' , 'items'를 골랐다.   
