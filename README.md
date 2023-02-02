@@ -46,3 +46,4 @@ pycaret보다 상황이 좋아졌다.
 Machinery는 명칭이다   
 Assembly - Machinery 안에 들어가는 부품   
 청구품목 - Assembly를 더 구체화한 거.   
+part1은 캐터필러에서 나오는 부품 번호인데 지금 original db에서는 인코딩이 되어 있어서 쓰기가 쉽지 않을 것같다.
