@@ -54,7 +54,7 @@ const Lead = () => {
   }, [data3]);
 
   const getMachinery = async () => {
-    let url = "http://10.125.121.177:8080/data/selectlist";
+    let url = "http://localhost:8080/data/selectlist";
 
     try {
       const resp = await fetch(url);
@@ -127,7 +127,7 @@ const Lead = () => {
   // };
 
   const getLeadtime = async () => {
-    let url = `http://10.125.121.177:8080/data/leadtime?machinery=${machinery}&items=${items}&part1=${part}`;
+    let url = `http://localhost:8080/data/leadtime?machinery=${machinery}&items=${items}&part1=${part}`;
 
     try {
       const resp = await fetch(url);

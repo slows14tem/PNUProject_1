@@ -4,10 +4,9 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import edu.pnu.domain.AutoSearch;
 import edu.pnu.domain.Category;
 import edu.pnu.domain.Leadtime_Result_Temp;
 import edu.pnu.domain.PastLeadtime;
@@ -18,6 +17,11 @@ public class DataController {
 	
 	@Autowired
 	private DataService dataservice;
+	
+	@GetMapping("/data/search")
+	public List<AutoSearch> getSearch(){
+		return dataservice.getSearch();
+	}
 	
 	@GetMapping("/data/selectlist")
 	public List<Category> getJson(){

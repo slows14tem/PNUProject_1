@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import edu.pnu.dao.DataDao;
+import edu.pnu.domain.AutoSearch;
 import edu.pnu.domain.Category;
 import edu.pnu.domain.Leadtime_Result_Temp;
 import edu.pnu.domain.PastLeadtime;
@@ -26,6 +27,10 @@ public class DataService {
 	
 	public List<PastLeadtime> getPastLeadtime(PastLeadtime original){
 		return dataDao.PastLeadtime(original);
+	}
+
+	public List<AutoSearch> getSearch() {
+		return dataDao.getSearch();
 	}
 
 

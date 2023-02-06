@@ -20,7 +20,7 @@ function MyModal(props){
 
   const getPastLeadtime = async () => {
     
-    let url = `http://10.125.121.177:8080/data/past_leadtime?machinery=${machinery}&items=${items}&part1=${part1}`;
+    let url = `http://localhost:8080/data/past_leadtime?machinery=${machinery}&items=${items}&part1=${part1}`;
 
     try {
       const resp = await fetch(url);

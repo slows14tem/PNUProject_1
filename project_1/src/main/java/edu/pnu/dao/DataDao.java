@@ -9,6 +9,7 @@ import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+import edu.pnu.domain.AutoSearch;
 import edu.pnu.domain.Category;
 import edu.pnu.domain.Leadtime_Result_Temp;
 import edu.pnu.domain.PastLeadtime;
@@ -18,6 +19,8 @@ public class DataDao {
 
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
+	
+	
 	
 	public List<Category> getJson() {
 		String sql = "SELECT machinery, items, part1 "
@@ -45,6 +48,14 @@ public class DataDao {
 		String sqlString = String.format(sql, original.getMachinery(), original.getItems(), original.getPart1());
 		List<PastLeadtime> list = jdbcTemplate.query(sqlString, 
 				new BeanPropertyRowMapper<PastLeadtime>(PastLeadtime.class));
+		return list;
+	}
+
+	public List<AutoSearch> getSearch() {
+		String sql = "SELECT * "
+				+ "FROM leadtime_rmse_23";
+		List<AutoSearch> list = jdbcTemplate.query(sql, 
+				new BeanPropertyRowMapper<AutoSearch>(AutoSearch.class));
 		return list;
 	}
 	
