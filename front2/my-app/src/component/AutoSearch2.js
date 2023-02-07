@@ -2,7 +2,10 @@ import React, { useState, useEffect } from "react";
 import Table from 'react-bootstrap/Table';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Pagination from "react-js-pagination";
+import Button from 'react-bootstrap/Button';
 import "../style/Paging.css"
+import "../style/Autosearch.css"
+import { Link } from "react-router-dom";
 
 const RestApiExample = () => {
 
@@ -24,17 +27,15 @@ const RestApiExample = () => {
   const [searchResults, setSearchResults] = useState([]);
 
   useEffect(() => {
+    //
     const fetchData = async () => {
       setLoading(true);
       try {
         const response = await fetch(
-          "http://localhost:8080/data/selectlist"
+          "http://10.125.121.177:8080/data/selectlist"
         );
         const json = await response.json();
-        // data에 json 값 저장
         setDatas(json);
-        // json 값중 키값이 machinery인 값 저장
-        // setData1(json.map((item) => item.machinery));
       } catch (e) {
         setError(e);
       } finally {
@@ -47,21 +48,17 @@ const RestApiExample = () => {
       setLoading(true);
       try {
         const response = await fetch(
-          "http://localhost:8080/data/search"
+          "http://10.125.121.177:8080/data/search"
         );
         const json = await response.json();
-        // data에 json 값 저장
         setList(json);
-        // json 값중 키값이 machinery인 값 저장
-        // setData1(json.map((item) => item.machinery));
       } catch (e) {
         setError(e);
       } finally {
         setLoading(false);
       }
     };
-    fetchData2();
-    
+    fetchData2();    
   }, []);
 
   const handleSelect = (e) => {
@@ -134,11 +131,15 @@ const RestApiExample = () => {
     setPage(page);
   };
 
+  const listOrder = (e) => {
+    e.preventDefault()
+    
+  }
   
 
   return (
     <>
-      <div>
+      <div className="autosearch">
       <select onChange={handleSelect}>
           {selectList.map((item) => (
             <option value={item} key={item}>
@@ -148,6 +149,7 @@ const RestApiExample = () => {
         </select>
         <form onSubmit={searchData}>
           <input
+            className="autoinput"
             list="options"
             value={selectedOption}
             onChange={handleChange}
@@ -158,14 +160,10 @@ const RestApiExample = () => {
               <option key={option} value={option} />
             ))}
           </datalist>
-          <button type="submit">submit</button>
+          {/* <button type="submit">submit</button> */}
+          <Button variant="dark" className="autobutt" type="submit">Submit</Button>
           {/* 선택한 값 submit 버튼 누르면 밑에 li태그 안에 표시 */}
         </form>
-        {/* <ul>
-          {searchResults.map((result) => (
-            <li key={result}>{result}</li>
-          ))}
-        </ul> */}
       </div>
       <Table id='testTable' striped bordered hover>
       <thead>
@@ -228,6 +226,7 @@ const RestApiExample = () => {
             </tr>
           ))}
       </tbody>
+      <Link to='/Order' state={rowdata}><Button variant="dark" className="autobutt">submit</Button></Link>
     </Table>
     </>
   );

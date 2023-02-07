@@ -54,7 +54,7 @@ const Lead = () => {
   }, [data3]);
 
   const getMachinery = async () => {
-    let url = "http://localhost:8080/data/selectlist";
+    let url = "http://10.125.121.177:8080/data/selectlist";
 
     try {
       const resp = await fetch(url);
@@ -108,26 +108,8 @@ const Lead = () => {
     setPart(e.target.value);
   };
 
-  // const getLeadtime = async (jsonObj) => {
-  //   let url = "http://10.125.121.177:8080/data/leadtime";
-
-  //   try {
-  //     const resp = await fetch(url, {
-  //       method: "post",
-  //       headers: {
-  //         "Content-Type": "application/json",
-  //       },
-  //       body: JSON.stringify(jsonObj),
-  //     });
-  //     const data = await resp.json();
-  //     console.log(data);
-  //   } catch (err) {
-  //     console.log(err);
-  //   }
-  // };
-
   const getLeadtime = async () => {
-    let url = `http://localhost:8080/data/leadtime?machinery=${machinery}&items=${items}&part1=${part}`;
+    let url = `http://10.125.121.177:8080/data/leadtime?machinery=${machinery}&items=${items}&part1=${part}`;
 
     try {
       const resp = await fetch(url);
@@ -163,7 +145,6 @@ const Lead = () => {
   return (
     <>
     <Container>
-      {/* <fieldset className="fieldBox"> */}
       <Row>
       <Col>
         <label className="label" for="choice"> Order To </label>
@@ -189,11 +170,6 @@ const Lead = () => {
         <Button variant="dark" className="butt" onClick={submitdata}>Submit</Button>
       </Col>
       </Row>
-        {/* <button className="butt" onClick={submitdata}>submit</button> */}
-        {/* <button type="submit" onClick={goUrl}>
-            submit
-          </button> */}
-      {/* </fieldset> */}
       </Container>
     </>
   );
