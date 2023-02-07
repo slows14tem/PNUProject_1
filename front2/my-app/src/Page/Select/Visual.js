@@ -1,36 +1,28 @@
 import React, { useState, useContext, useEffect } from 'react';
-import { AppContext } from "./SelectDate";
 import Modal from 'react-modal';
 import Barchart from './BarChart';
 import Button from 'react-bootstrap/Button';
-import '../style/Modal.css'
+import './Visual.css'
+import { getPastLeadtime } from "../../API/main";
 
 function MyModal(props){
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [list, setList] = useState();
-  // props2={props['props']?.[0]['avg_leadtime']}
 
   const machinery = props['props']?.[0]['machinery']
   const items = props['props']?.[0]['items']
   const part1 = props['props']?.[0]['part1']
 
   useEffect(()=>{
-    getPastLeadtime();
+    (async () => {
+      await getPastLeadtime(machinery, items, part1)
+        .then((res)=>{
+          //axios의 response인 Json에 key, value를 추가하는 법
+          res.predicted_leadtime = props['props']?.[0]['avg_leadtime']
+          setList(res);
+        })
+    })();
   },[props])
-
-  const getPastLeadtime = async () => {
-    
-    let url = `http://localhost:8080/data/past_leadtime?machinery=${machinery}&items=${items}&part1=${part1}`;
-
-    try {
-      const resp = await fetch(url);
-      const data = await resp.json();
-      data.predicted_leadtime = props['props']?.[0]['avg_leadtime']
-      setList(data)
-    } catch (err) {
-      console.log(err);
-    }
-  }
 
   const customStyles = {
     content: {

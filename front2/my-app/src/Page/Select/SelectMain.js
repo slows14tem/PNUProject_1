@@ -1,20 +1,17 @@
 import "react-calendar/dist/Calendar.css";
 import React, { useState, createContext, useEffect } from "react";
 import Calendar from "react-calendar";
-import moment, { months } from "moment";
-import { addDays } from "date-fns";
-import Lead from "./Lead";
-import Barchart from "./BarChart";
-import MyModal from "./Modal";
+import moment from "moment";
+import Lead from "./Items";
+import MyModal from "./Visual";
 import "react-datepicker/dist/react-datepicker.css";
-import { ko } from "date-fns/esm/locale";
-import "../style/selectDate.css";
+import "./selectMain.css";
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-
+//데이터를 이동하기 위해 useContext를 사용
 export const AppContext = createContext();
 
 function SelectDate() {
@@ -27,24 +24,12 @@ function SelectDate() {
     setVisible(!visible) 
   },[lead])
 
-
-
-  // 숫자만큼 선택한 날짜에서 더함
-  // json 데이터 중 리드 타임을 어떤 변수에 저장해서 (+-표준편차)
-  // 선택한 날짜 ~ 선택된 날짜 + 리드타임까지 표시 할려고 함
-  // 해당 컴포넌트에서 함수호출을 통해 화면에 나타내거나 변수에 저장할 수 있지만
-  // 다른 컴포넌트에 값을 전달하는 것은 잘 모르겠음
-
   const d1 = [];
   // let a = 100;
   
   let a = startDate;
   let b = lead?.[0]["avg_leadtime"];
   let t = b;
-
-  // for (let i = 0; i < a; i++) {
-  //   d1.push(addDays(startDate, i));
-  // }
 
   let y = parseInt(t / 365);
   let m = parseInt((t % 365) / 30);
@@ -56,19 +41,24 @@ function SelectDate() {
       <Row>
         <Col>
         <div className="top">
-          유출여부 조회하기
-          <br/>
-          대다수의 온라인서비스 사용자들이 동일한 계정정보(아이디,페스워드)를 사용하고 있어, 1건의 개정정보 유출로 막대한 피해를 입을 수 있습니다.
-          <br/>
-          따라서 동일한 패스워드를 타 사이트에서 중복하여 사용하지 말고, 사용중인 패스워드를 주기적으로 변경하길 권장합니다.
+        · 리드타임 예측 서비스입니다. <br/><br/>
+        · Order To - 발주처를 입력하십시오.<br/>
+        · MACHINERY - 부품 대분류를 선택하십시오.<br/>
+        · Description - 부품을 선택하십시오.<br/>
+        · Part NO - 부품 번호를 선택하십시오.<br/>
+        · Order Date - 주문 예상일자를 입력하십시오.<br/>
+        · Qty - 주문 수량을 입력하십시오.<br/><br/>
         </div>
+        <font color = "gray">
+        · submit 버튼을 클릭하시면 도착예상일자를 조회하실 수 있습니다.<br/>
+        · 시각화 버튼을 클릭하시면 과거 도착 이력을 그래프로 조회하실 수 있습니다.
+        </font>
         </Col>
       </Row>
       <Row>
         <Col><Lead /></Col>
         <Col>
         <Calendar
-          // onChange={onChange}
           value={moment(startDate).add(lead?.[0]["avg_leadtime"], 'days')['_d']}
           locale="en-EN"
           tileClassName={({ date, view }) => {
@@ -94,10 +84,7 @@ function SelectDate() {
         <MyModal props={lead} />
         </Col>        
       </Row>
-      {/* <Row><Col><MyModal props={lead} /></Col></Row> */}
-    </Container>
-        
-
+    </Container>        
     </AppContext.Provider>
   );
 }

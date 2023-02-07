@@ -3,9 +3,10 @@ import Button from 'react-bootstrap/Button';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { useLocation } from 'react-router';
 
+//선택된 청구품목 목록을 따로 출력
 function OrderList(){
+  //useLocation을 사용해 넘어온 router로 넘어온 props정보를 활용가능
   const location = useLocation();
-  console.log(location.state);
   return(
     <>
       <h3>OrderList</h3>

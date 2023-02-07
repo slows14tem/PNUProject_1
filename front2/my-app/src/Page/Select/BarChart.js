@@ -4,8 +4,6 @@ import Table from 'react-bootstrap/Table';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 function Barchart(props) {
-  console.log(props['props'])
-  console.log(props['props']['predicted_leadtime'])
 
   const handle = {
     barClick: (data: any) => {

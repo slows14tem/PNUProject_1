@@ -1,13 +1,14 @@
 import React from "react";
 import { useEffect, useState, useContext, useRef } from "react";
-import { AppContext } from "./SelectDate";
+import { AppContext } from "./SelectMain";
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Button from 'react-bootstrap/Button';
-import "../style/lead.css";
-// import { useNavigate } from "react-router-dom";
+import "./Items.css";
+import { getLeadtime } from "../../API/main";
+
 const Lead = () => {
   const [datas, setdata] = useState();
   const [data1, setdata1] = useState();
@@ -15,7 +16,7 @@ const Lead = () => {
   const [data3, setdata3] = useState();
   const [machinery, setMachinery] = useState();
   const [items, setItems] = useState();
-  const [part, setPart] = useState();
+  const [part1, setPart1] = useState();
   const [order, setOrder] = useState();
   const [lead, setLead] = useContext(AppContext);
 
@@ -105,32 +106,19 @@ const Lead = () => {
 
   const changeValue3 = (e) => {
     e.preventDefault();
-    setPart(e.target.value);
-  };
-
-  const getLeadtime = async () => {
-    let url = `http://10.125.121.177:8080/data/leadtime?machinery=${machinery}&items=${items}&part1=${part}`;
-
-    try {
-      const resp = await fetch(url);
-      const data = await resp.json();
-      data[0].order_date=order
-      // console.log(data)
-      setLead(data)
-
-    } catch (err) {
-      console.log(err);
-    }
+    setPart1(e.target.value);
   };
 
   const submitdata = (e) => {
     e.preventDefault();
-    let jsonObj = {
-      machinery: machinery,
-      items: items,
-      part1: part,
-    };
-    getLeadtime(jsonObj);
+    (async () => {
+      await getLeadtime(machinery, items, part1)
+        .then((res)=>{
+          //axios의 response인 Json에 key, value를 추가하는 법
+          res[0].order_date=order
+          setLead(res);
+        })
+    })();
   };
 
   const refDateIn= useRef();
