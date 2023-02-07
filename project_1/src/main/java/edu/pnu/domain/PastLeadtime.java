@@ -10,6 +10,7 @@ public class PastLeadtime {
 	private String items;	//청구 품목
 	private String part1; //Part No.1
 	private int leadtime;
+	private String key2;
 	private LocalDate balju;	//발주일
 	private String baljucheo;	//발주처
 	private String gyeonjeokhwapye;	//견적화폐
@@ -40,6 +41,12 @@ public class PastLeadtime {
 	}
 	public void setLeadtime(int leadtime) {
 		this.leadtime = leadtime;
+	}
+	public String getKey2() {
+		return key2;
+	}
+	public void setKey2(String key2) {
+		this.key2 = key2;
 	}
 	public LocalDate getBalju() {
 		return balju;

@@ -23,6 +23,7 @@ function Barchart(props) {
       <thead>
         <tr>
           {/* <th>#</th> */}
+          <th>카테고리</th>
           <th>발주일</th>
           <th>발주처</th>
           <th>발주수량</th>
@@ -34,6 +35,7 @@ function Barchart(props) {
       <tbody>
         {props['props'].map((item) => (
           <tr key={item.machinery+item.items}>
+            <td>{item.key2}</td>
             <td>{item.balju}</td>
             <td>{item.baljucheo}</td>
             <td>{item.baljusuryang}</td>

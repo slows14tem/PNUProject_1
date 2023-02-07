@@ -108,24 +108,6 @@ const Lead = () => {
     setPart(e.target.value);
   };
 
-  // const getLeadtime = async (jsonObj) => {
-  //   let url = "http://10.125.121.177:8080/data/leadtime";
-
-  //   try {
-  //     const resp = await fetch(url, {
-  //       method: "post",
-  //       headers: {
-  //         "Content-Type": "application/json",
-  //       },
-  //       body: JSON.stringify(jsonObj),
-  //     });
-  //     const data = await resp.json();
-  //     console.log(data);
-  //   } catch (err) {
-  //     console.log(err);
-  //   }
-  // };
-
   const getLeadtime = async () => {
     let url = `http://10.125.121.177:8080/data/leadtime?machinery=${machinery}&items=${items}&part1=${part}`;
 
@@ -133,7 +115,6 @@ const Lead = () => {
       const resp = await fetch(url);
       const data = await resp.json();
       data[0].order_date=order
-      // console.log(data)
       setLead(data)
 
     } catch (err) {
@@ -155,7 +136,6 @@ const Lead = () => {
 
   const handleChange = (e) => {
     e.preventDefault();
-    // console.log(refDateIn.current.value)
     setOrder(refDateIn.current.value)
     //달력으로 입력받은 날짜값(refDateIn)를 url에 입력될 viewDay로 변경
   }
@@ -163,7 +143,6 @@ const Lead = () => {
   return (
     <>
     <Container>
-      {/* <fieldset className="fieldBox"> */}
       <Row>
       <Col>
         <label className="label" for="choice"> Order To </label>
@@ -189,11 +168,6 @@ const Lead = () => {
         <Button variant="dark" className="butt" onClick={submitdata}>Submit</Button>
       </Col>
       </Row>
-        {/* <button className="butt" onClick={submitdata}>submit</button> */}
-        {/* <button type="submit" onClick={goUrl}>
-            submit
-          </button> */}
-      {/* </fieldset> */}
       </Container>
     </>
   );

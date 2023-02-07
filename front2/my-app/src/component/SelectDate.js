@@ -6,9 +6,11 @@ import { addDays } from "date-fns";
 import Lead from "./Lead";
 import Barchart from "./BarChart";
 import MyModal from "./Modal";
+import AutoSearch from "./AutoSearch"
 import "react-datepicker/dist/react-datepicker.css";
 import { ko } from "date-fns/esm/locale";
 import "../style/selectDate.css";
+import Navbar from 'react-bootstrap/Navbar';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
@@ -52,11 +54,17 @@ function SelectDate() {
 
   return (
     <AppContext.Provider value={[lead, setLead]}>
+    <Navbar bg="light">
+      <Container>
+        <Navbar.Brand>Brand link</Navbar.Brand>
+        {/* <AutoSearch/> */}
+      </Container>
+    </Navbar>
     <Container>
       <Row>
         <Col>
         <div className="top">
-          유출여부 조회하기
+          Lead Time 예측 서비스
           <br/>
           대다수의 온라인서비스 사용자들이 동일한 계정정보(아이디,페스워드)를 사용하고 있어, 1건의 개정정보 유출로 막대한 피해를 입을 수 있습니다.
           <br/>
@@ -92,7 +100,7 @@ function SelectDate() {
         </div>}
         
         <MyModal props={lead} />
-        </Col>        
+        </Col>
       </Row>
       {/* <Row><Col><MyModal props={lead} /></Col></Row> */}
     </Container>

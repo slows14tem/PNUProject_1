@@ -1,8 +1,6 @@
 package edu.pnu.dao;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
@@ -20,12 +18,20 @@ public class DataDao {
 	private JdbcTemplate jdbcTemplate;
 	
 	public List<Category> getJson() {
-		String sql = "SELECT machinery, items, part1 "
-				+ "from category";
+		String sql = "SELECT machinery, items, part1, baljucheo "
+				+ "from original";
 		List<Category> list = jdbcTemplate.query(sql, 
 				new BeanPropertyRowMapper<Category>(Category.class));
 		return list;
 	}
+	
+//	public List<Category> getJson() {
+//		String sql = "SELECT machinery, items, part1 "
+//				+ "from category";
+//		List<Category> list = jdbcTemplate.query(sql, 
+//				new BeanPropertyRowMapper<Category>(Category.class));
+//		return list;
+//	}
 
 	public List<Leadtime_Result_Temp> getLeadtime(Leadtime_Result_Temp leadResult) {
 		String sql = "SELECT machinery, items, part1, avg_leadtime, stdev_leadtime "
