@@ -20,8 +20,7 @@ public class DataDao {
 	
 	public List<CategoryVO> getSelectList() {
 		String sql = "SELECT * "
-				+ "FROM original "
-				+ "ORDER BY baljucheo, machinery, items, part1";
+				+ "FROM original";
 		List<CategoryVO> list = jdbcTemplate.query(sql, 
 				new BeanPropertyRowMapper<CategoryVO>(CategoryVO.class));
 		return list;
@@ -54,6 +53,18 @@ public class DataDao {
 		List<PastLeadtimeVO> list = jdbcTemplate.query(sqlString, 
 				new BeanPropertyRowMapper<PastLeadtimeVO>(PastLeadtimeVO.class));
 		return list;
+	}
+
+	public void addLog(CategoryVO category) {
+		String sql = "INSERT INTO search_log (machinery, items, part1) "
+				+ "VALUES (?,?,?)";
+		try {
+			jdbcTemplate.update(sql, category.getMachinery(), category.getItems(), category.getPart1());
+			System.out.println(category.getMachinery() + category.getItems()+ category.getPart1());
+		} catch(Exception e) {
+			e.printStackTrace();
+		}		
+		
 	}
 	
 }

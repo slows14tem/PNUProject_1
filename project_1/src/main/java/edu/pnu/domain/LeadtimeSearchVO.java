@@ -14,5 +14,7 @@ public class LeadtimeSearchVO {
 	private String part1;
 	private String key2;
 	private int leadtime_predicted;
+	private String gyeonjeokhwapye;	//견적화폐
+	private int gyeonjeokdanga;	//견적단가
 
 }

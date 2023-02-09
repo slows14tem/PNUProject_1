@@ -7,7 +7,7 @@ import Col from 'react-bootstrap/Col';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Button from 'react-bootstrap/Button';
 import "./Items.css";
-import { getLeadtime } from "../../API/main";
+import { getLeadtime, addLog } from "../../API/main";
 
 const Lead = () => {
   const [datas, setdata] = useState();
@@ -26,6 +26,7 @@ const Lead = () => {
 
   useEffect(() => {
     const result = [...new Set(data1)];
+    result.sort();
     for (let i = 0; i < result.length; i++) {
       let opt = document.createElement("option");
       opt.value = result[i];
@@ -36,6 +37,7 @@ const Lead = () => {
 
   useEffect(() => {
     const result2 = [...new Set(data2)];
+    result2.sort();
     for (let i = 0; i < result2.length; i++) {
       let opt = document.createElement("option");
       opt.value = result2[i];
@@ -46,6 +48,7 @@ const Lead = () => {
 
   useEffect(() => {
     const result3 = [...new Set(data3)];
+    result3.sort();
     for (let i = 0; i < result3.length; i++) {
       let opt = document.createElement("option");
       opt.value = result3[i];
@@ -55,7 +58,7 @@ const Lead = () => {
   }, [data3]);
 
   const getMachinery = async () => {
-    let url = "http://10.125.121.177:8080/data/selectlist";
+    let url = "http://localhost:8080/data/selectlist";
 
     try {
       const resp = await fetch(url);
@@ -109,17 +112,28 @@ const Lead = () => {
     setPart1(e.target.value);
   };
 
+  const logdata = {
+    "machinery": machinery,
+    "items": items,
+    "part1": part1
+  }
+
   const submitdata = (e) => {
     e.preventDefault();
     (async () => {
       await getLeadtime(machinery, items, part1)
         .then((res)=>{
           //axios의 response인 Json에 key, value를 추가하는 법
-          res.data.order_date=order
-          setLead(res.data);
-          console.log(res.data)
+          res.order_date=order
+          setLead(res);
         })
-    })()
+    })();
+
+    //검색한 로그를 db에 입력
+    (async () => {
+      await addLog(logdata)
+        .then((res) => res)
+    })();
   };
 
   const refDateIn= useRef();
@@ -131,6 +145,7 @@ const Lead = () => {
     //달력으로 입력받은 날짜값(refDateIn)를 url에 입력될 viewDay로 변경
   }
 
+  //reading 'leadtime_predicted' 에러 발생하는 이유 : 해당 품목을 leadtime_final에서 검색하면 데이터가 없음
   return (
     <>
     <Container>

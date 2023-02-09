@@ -27,13 +27,14 @@ const Autosearch = () => {
         .then((res) => setDatas(res))
     })();
     //TypeError: (intermediate value)... => 함수와 함수사이에 ';' (세미콜론)이 빠지면 발생하는 에러
-
+    
     //검색결과 출력을 위한 row data(리드타임 예측 결과 테이블)
     (async () => {
       await getAutoSearch()
         .then((res) => setList(res))
     })();
   }, []);
+  // console.log(datas)
 
   //검색조건 리스트
   const selectList = ["===선택===", "발주처", "machinery", "items", "part1"];
@@ -41,20 +42,20 @@ const Autosearch = () => {
   // 중복을 제거한 machinery값을 저장하기위한 배열
   let options = [];
 
-  //검색조건(selectList)하면 발생 이벤트
+  //검색조건(selectList)을 선택하면 발생 이벤트
   const handleSelect = (e) => {
     //선택한 조건 저장
     setSelected(e.target.value);
 
     //조건 선택하면 자동완성목록 띄우기 위한 데이터 정제(선택된 필드 추출 및 중복제거)
     if (e.target.value === "발주처") {
-      setData([...new Set(datas.map((item) => item.baljucheo))])
+      setData([...new Set(datas.map((item) => item.baljucheo))]);
     } else if (e.target.value === "machinery") {
-      setData([...new Set(datas.map((item) => item.machinery))])
+      setData([...new Set(datas.map((item) => item.machinery))]);
     } else if (e.target.value === "items") {
-      setData([...new Set(datas.map((item) => item.items))])
+      setData([...new Set(datas.map((item) => item.items))]);
     } else {
-      setData([...new Set(datas.map((item) => item.part1))])
+      setData([...new Set(datas.map((item) => item.part1))]);
     }
   };
 
@@ -153,10 +154,12 @@ const Autosearch = () => {
             <th className="th2">Part.No</th>
             <th className="th2">카테고리</th>
             <th className="th2">발주처</th>
-            <th className="th2">리드타임</th>
+            <th className="th2">리드타임(day)</th>
+            <th className="th2">견적화폐</th>
+            <th className="th2">견적단가</th>
           </tr>
         </thead>
-        <tbody>
+        <tbody className="OrderTable">
           {currentPosts && searchList.length > 0 ? (
             currentPosts.map((item, index) => (
               //검색결과 테이블 클릭한 행의 정보를 저장
@@ -167,6 +170,8 @@ const Autosearch = () => {
                 <td>{item.key2}</td>
                 <td>{item.baljucheo}</td>
                 <td>{item.leadtime_predicted}</td>
+                <td>{item.gyeonjeokhwapye}</td>
+                <td>{item.gyeonjeokdanga}</td>
               </tr>
             )))
             : <tr><td>검색결과가 없습니다.</td></tr>
@@ -183,7 +188,7 @@ const Autosearch = () => {
         onChange={handlePageChange} // 페이지 변경을 핸들링하는 함수
       />
       <Table striped bordered hover>
-        <thead className="tableHeader">
+        <thead>
           <tr>
             {/* <th>#</th> */}
             <th className="th2">Machinery</th>
@@ -192,9 +197,12 @@ const Autosearch = () => {
             <th className="th2">카테고리</th>
             <th className="th2">발주처</th>
             <th className="th2">리드타임</th>
+            <th className="th2">견적화폐</th>
+            <th className="th2">견적단가</th>
+            <th className="th2">수량</th>
           </tr>
         </thead>
-        <tbody>          
+        <tbody className="OrderTable">          
           {rowdata.length > 0 ? (
           rowdata?.map((item, index) => (
             //테이블 클릭하여 저장된 정보를 새로운 테이블로 출력(장바구니 같은 개념으로 생각중)
@@ -206,6 +214,9 @@ const Autosearch = () => {
               <td>{item.key2}</td>
               <td>{item.baljucheo}</td>
               <td>{item.leadtime_predicted}</td>
+              <td>{item.gyeonjeokhwapye}</td>
+              <td>{item.gyeonjeokdanga}</td>
+              {/* <td><input></input></td> */}
             </tr>
           )))
           : <tr><td>선택한 품목이 없습니다.</td></tr>

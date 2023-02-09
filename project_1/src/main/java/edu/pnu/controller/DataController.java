@@ -4,6 +4,8 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import edu.pnu.domain.CategoryVO;
@@ -37,5 +39,10 @@ public class DataController {
 	@GetMapping("/data/search")
 	public List<LeadtimeSearchVO> getSearch(){
 		return dataservice.getSearch();
+	}
+	
+	@PostMapping("/data/searchlog")
+	public void addLog(@RequestBody CategoryVO category) {
+		dataservice.addLog(category);
 	}
 }

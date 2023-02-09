@@ -14,7 +14,6 @@ function Barchart(props) {
       console.log(data);
     },
   };
-  console.log(props)
   return (
     <>
     <Table striped bordered hover>

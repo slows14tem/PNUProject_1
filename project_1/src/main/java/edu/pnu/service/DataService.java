@@ -33,5 +33,9 @@ public class DataService {
 		return dataDao.getSearch();
 	}
 
+	public void addLog(CategoryVO category) {
+		dataDao.addLog(category);
+	}
+
 
 }
