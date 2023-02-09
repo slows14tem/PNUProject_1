@@ -6,10 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import edu.pnu.dao.DataDao;
-import edu.pnu.domain.AutoSearch;
-import edu.pnu.domain.Category;
-import edu.pnu.domain.Leadtime_Result_Temp;
-import edu.pnu.domain.PastLeadtime;
+import edu.pnu.domain.CategoryVO;
+import edu.pnu.domain.LeadtimeSearchVO;
+import edu.pnu.domain.LeadtimeResultVO;
+import edu.pnu.domain.PastLeadtimeVO;
 
 @Service
 public class DataService {
@@ -17,22 +17,21 @@ public class DataService {
 	@Autowired
 	private DataDao dataDao;
 
-	public List<Category> getJson(){
-		return dataDao.getJson();
+	public List<CategoryVO> getSelectList(){
+		return dataDao.getSelectList();
 	}
 	
-	public List<Leadtime_Result_Temp> getLeadtime(Leadtime_Result_Temp leadResult){
+	public List<LeadtimeResultVO> getLeadtime(LeadtimeResultVO leadResult){
 		return dataDao.getLeadtime(leadResult);		
 	}
 	
-	public List<PastLeadtime> getPastLeadtime(PastLeadtime original){
+	public List<PastLeadtimeVO> getPastLeadtime(PastLeadtimeVO original){
 		return dataDao.PastLeadtime(original);
 	}
 
-	public List<AutoSearch> getSearch() {
+	public List<LeadtimeSearchVO> getSearch() {
 		return dataDao.getSearch();
 	}
-
 
 
 }

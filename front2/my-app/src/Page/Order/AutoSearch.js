@@ -28,7 +28,7 @@ const Autosearch = () => {
     })();
     //TypeError: (intermediate value)... => 함수와 함수사이에 ';' (세미콜론)이 빠지면 발생하는 에러
 
-    //검색결과 출력을 위한 row data
+    //검색결과 출력을 위한 row data(리드타임 예측 결과 테이블)
     (async () => {
       await getAutoSearch()
         .then((res) => setList(res))
@@ -36,7 +36,7 @@ const Autosearch = () => {
   }, []);
 
   //검색조건 리스트
-  const selectList = ["===선택===", "machinery", "items", "part1"];
+  const selectList = ["===선택===", "발주처", "machinery", "items", "part1"];
 
   // 중복을 제거한 machinery값을 저장하기위한 배열
   let options = [];
@@ -47,7 +47,9 @@ const Autosearch = () => {
     setSelected(e.target.value);
 
     //조건 선택하면 자동완성목록 띄우기 위한 데이터 정제(선택된 필드 추출 및 중복제거)
-    if (e.target.value === "machinery") {
+    if (e.target.value === "발주처") {
+      setData([...new Set(datas.map((item) => item.baljucheo))])
+    } else if (e.target.value === "machinery") {
       setData([...new Set(datas.map((item) => item.machinery))])
     } else if (e.target.value === "items") {
       setData([...new Set(datas.map((item) => item.items))])
@@ -83,7 +85,8 @@ const Autosearch = () => {
     if (searchResults.length === 1) {
       //list = 검색결과 출력을 위한 row data
       //list에서 선택된 검색조건, 검색어와 일치하는 항목을 필터링
-      if (Selected === "machinery") { setSearchList(list.filter((item) => item.machinery.includes(searchResults))) }
+      if (Selected === "발주처") { setSearchList(list.filter((item) => item.baljucheo.includes(searchResults))) }
+      else if (Selected === "machinery") { setSearchList(list.filter((item) => item.machinery.includes(searchResults))) }
       else if (Selected === "items") { setSearchList(list.filter((item) => item.items.includes(searchResults))) }
       else { setSearchList(list.filter((item) => item.part1.includes(searchResults))) }
     }
@@ -158,7 +161,7 @@ const Autosearch = () => {
                 <td>{item.part1}</td>
                 <td>{item.key2}</td>
                 <td>{item.baljucheo}</td>
-                <td>{item.leadtime}</td>
+                <td>{item.leadtime_predicted}</td>
               </tr>
             )))
             : <tr><td>검색결과가 없습니다.</td></tr>
@@ -195,7 +198,7 @@ const Autosearch = () => {
               <td>{item.part1}</td>
               <td>{item.key2}</td>
               <td>{item.baljucheo}</td>
-              <td>{item.leadtime}</td>
+              <td>{item.leadtime_predicted}</td>
             </tr>
           ))}
         </tbody>

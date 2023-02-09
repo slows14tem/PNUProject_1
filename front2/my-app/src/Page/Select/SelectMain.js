@@ -3,7 +3,7 @@ import React, { useState, createContext, useEffect } from "react";
 import Calendar from "react-calendar";
 import moment from "moment";
 import Lead from "./Items";
-import MyModal from "./Visual";
+import Visual from "./Visual";
 import "react-datepicker/dist/react-datepicker.css";
 import "./selectMain.css";
 import Container from 'react-bootstrap/Container';
@@ -28,7 +28,7 @@ function SelectDate() {
   // let a = 100;
   
   let a = startDate;
-  let b = lead?.[0]["avg_leadtime"];
+  let b = lead?.[0]["leadtime_predicted"];
   let t = b;
 
   let y = parseInt(t / 365);
@@ -59,7 +59,7 @@ function SelectDate() {
         <Col><Lead /></Col>
         <Col>
         <Calendar
-          value={moment(startDate).add(lead?.[0]["avg_leadtime"], 'days')['_d']}
+          value={moment(startDate).add(lead?.[0]["leadtime_predicted"], 'days')['_d']}
           locale="en-EN"
           tileClassName={({ date, view }) => {
             if (
@@ -81,7 +81,7 @@ function SelectDate() {
           {moment(startDate).add(b, "days").format("YYYY년 MM월 DD일")}에 입고예정입니다.
         </div>}
         
-        <MyModal props={lead} />
+        <Visual props={lead} />
         </Col>        
       </Row>
     </Container>        

@@ -5,7 +5,7 @@ import Button from 'react-bootstrap/Button';
 import './Visual.css'
 import { getPastLeadtime } from "../../API/main";
 
-function MyModal(props){
+function Visual(props){
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [list, setList] = useState();
 
@@ -18,7 +18,7 @@ function MyModal(props){
       await getPastLeadtime(machinery, items, part1)
         .then((res)=>{
           //axios의 response인 Json에 key, value를 추가하는 법
-          res.predicted_leadtime = props['props']?.[0]['avg_leadtime']
+          res.predicted_leadtime = props['props']?.[0]['leadtime_predicted']
           setList(res);
         })
     })();
@@ -47,4 +47,4 @@ function MyModal(props){
     </>
   )
 };
-export default MyModal;
+export default Visual;

@@ -20,12 +20,12 @@ function Barchart(props) {
     <Table striped bordered hover>
       <thead>
         <tr>
-          {/* <th>#</th> */}
           <th>발주일</th>
           <th>발주처</th>
           <th>발주수량</th>
+          <th>발주금액</th>
           <th>견적단가</th>
-          <th>견적화폐</th>
+          <th>견적화폐</th>          
           <th>리드타임</th>
         </tr>
       </thead>
@@ -35,6 +35,7 @@ function Barchart(props) {
             <td>{item.balju}</td>
             <td>{item.baljucheo}</td>
             <td>{item.baljusuryang}</td>
+            <td>{item.baljugeumaek}</td>
             <td>{item.gyeonjeokdanga}</td>
             <td>{item.gyeonjeokhwapye}</td>
             <td>{item.leadtime}</td>

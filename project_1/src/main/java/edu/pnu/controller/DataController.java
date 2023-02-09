@@ -6,10 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import edu.pnu.domain.AutoSearch;
-import edu.pnu.domain.Category;
-import edu.pnu.domain.Leadtime_Result_Temp;
-import edu.pnu.domain.PastLeadtime;
+import edu.pnu.domain.CategoryVO;
+import edu.pnu.domain.LeadtimeSearchVO;
+import edu.pnu.domain.LeadtimeResultVO;
+import edu.pnu.domain.PastLeadtimeVO;
 import edu.pnu.service.DataService;
 
 @RestController
@@ -18,27 +18,24 @@ public class DataController {
 	@Autowired
 	private DataService dataservice;
 	
-	@GetMapping("/data/search")
-	public List<AutoSearch> getSearch(){
-		return dataservice.getSearch();
-	}
-	
+
 	@GetMapping("/data/selectlist")
-	public List<Category> getJson(){
-		return dataservice.getJson();
+	public List<CategoryVO> getSelectList(){
+		return dataservice.getSelectList();
 	}
-	
-//	@PostMapping("/data/leadtime")
-//	public List<Leadtime_Result_Temp> getLeadtime(@RequestBody Leadtime_Result_Temp leadResult){
-//		return dataservice.getLeadtime(leadResult);
-//	}
+
 	@GetMapping("/data/leadtime")
-	public List<Leadtime_Result_Temp> getLeadtime(Leadtime_Result_Temp leadResult){
+	public List<LeadtimeResultVO> getLeadtime(LeadtimeResultVO leadResult){
 		return dataservice.getLeadtime(leadResult);
 	}
 	
 	@GetMapping("/data/past_leadtime")
-	public List<PastLeadtime> getPastLeadtime(PastLeadtime original){
+	public List<PastLeadtimeVO> getPastLeadtime(PastLeadtimeVO original){
 		return dataservice.getPastLeadtime(original);
+	}
+	
+	@GetMapping("/data/search")
+	public List<LeadtimeSearchVO> getSearch(){
+		return dataservice.getSearch();
 	}
 }
