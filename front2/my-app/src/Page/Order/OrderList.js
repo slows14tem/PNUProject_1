@@ -2,6 +2,8 @@ import Table from 'react-bootstrap/Table';
 import Button from 'react-bootstrap/Button';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { useLocation } from 'react-router';
+import "./Autosearch.css"
+import { Link } from "react-router-dom";
 
 //선택된 청구품목 목록을 따로 출력
 function OrderList(){
@@ -30,12 +32,12 @@ function OrderList(){
               <td>{item.part1}</td>
               <td>{item.key2}</td>
               <td>{item.baljucheo}</td>
-              <td>{item.leadtime}</td>
+              <td>{item.leadtime_predicted}</td>
             </tr>
           ))}
-      </tbody>
-      <Button variant="dark" className="autobutt">Submit</Button>
+      </tbody>      
     </Table>
+    <Link to='/'><Button variant="dark" className="autobutt2">뒤로가기</Button></Link>
     </>
   );
 }

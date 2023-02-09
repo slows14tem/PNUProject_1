@@ -114,6 +114,11 @@ const Autosearch = () => {
     setPage(page);
   };
 
+  // const selectRemove = (id) => {
+  //   rowdata?.filter((item, index) => console.log(index))
+  //   console.log(id)
+  // }
+
   return (
     <>
       <div className="autosearch">
@@ -137,18 +142,18 @@ const Autosearch = () => {
               <option key={option} value={option} />
             ))}
           </datalist>
-          <Button variant="dark" className="autobutt" type="submit">Submit</Button>
+          <Button variant="dark" className="autobutt" type="submit">검색</Button>
         </form>
       </div>
       <Table striped bordered hover>
         <thead>
           <tr>
-            <th>Machinery</th>
-            <th>청구품목</th>
-            <th>Part.No</th>
-            <th>카테고리</th>
-            <th>발주처</th>
-            <th>리드타임</th>
+            <th className="th2">Machinery</th>
+            <th className="th2">청구품목</th>
+            <th className="th2">Part.No</th>
+            <th className="th2">카테고리</th>
+            <th className="th2">발주처</th>
+            <th className="th2">리드타임</th>
           </tr>
         </thead>
         <tbody>
@@ -178,21 +183,23 @@ const Autosearch = () => {
         onChange={handlePageChange} // 페이지 변경을 핸들링하는 함수
       />
       <Table striped bordered hover>
-        <thead>
+        <thead className="tableHeader">
           <tr>
             {/* <th>#</th> */}
-            <th>Machinery</th>
-            <th>청구품목</th>
-            <th>Part.No</th>
-            <th>카테고리</th>
-            <th>발주처</th>
-            <th>리드타임</th>
+            <th className="th2">Machinery</th>
+            <th className="th2">청구품목</th>
+            <th className="th2">Part.No</th>
+            <th className="th2">카테고리</th>
+            <th className="th2">발주처</th>
+            <th className="th2">리드타임</th>
           </tr>
         </thead>
         <tbody>          
-          {rowdata?.map((item, index) => (
+          {rowdata.length > 0 ? (
+          rowdata?.map((item, index) => (
             //테이블 클릭하여 저장된 정보를 새로운 테이블로 출력(장바구니 같은 개념으로 생각중)
-            <tr key={index}>
+            //클릭하면 테이블에서 삭제
+            <tr key={index} onClick={() => setRowdata(rowdata.filter(ritem => ritem.id !== item.id))}>
               <td>{item.machinery}</td>
               <td>{item.items}</td>
               <td>{item.part1}</td>
@@ -200,12 +207,14 @@ const Autosearch = () => {
               <td>{item.baljucheo}</td>
               <td>{item.leadtime_predicted}</td>
             </tr>
-          ))}
+          )))
+          : <tr><td>선택한 품목이 없습니다.</td></tr>
+        }
         </tbody>
       </Table>
       {/* 선택되어 따로 생성된 테이블의 정보를 OrderList로 전송(장바구니 목록 결제하는 느낌)
       #state를 사용하면 link를 이용해서도 props를 전송 */}
-      <Link to='/Order' state={rowdata}><Button variant="dark" className="autobutt">submit</Button></Link>
+      <Link to='/Order' state={rowdata}><Button variant="dark" className="autobutt2">발주</Button></Link>
     </>
   );
 };

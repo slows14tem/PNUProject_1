@@ -14,7 +14,7 @@ function Barchart(props) {
       console.log(data);
     },
   };
-
+  console.log(props)
   return (
     <>
     <Table striped bordered hover>
@@ -30,7 +30,7 @@ function Barchart(props) {
         </tr>
       </thead>
       <tbody>
-        {props['props'].map((item) => (
+        {props?.['props'].map((item) => (
           <tr key={item.machinery+item.items}>
             <td>{item.balju}</td>
             <td>{item.baljucheo}</td>

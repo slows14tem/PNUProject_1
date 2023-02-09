@@ -11,8 +11,8 @@ function Navi(){
         <Container>
           <Navbar.Brand><img src = {logo}/></Navbar.Brand>
           <Nav className="me-auto">
-            <Nav.Link href="/">Order</Nav.Link>
-            <Nav.Link href="/Select">Select</Nav.Link>
+            <Nav.Link href="/">Select</Nav.Link>
+            <Nav.Link href="/OrderMain">Order</Nav.Link>
           </Nav>
         </Container>
       </Navbar>

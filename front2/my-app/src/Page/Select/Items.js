@@ -115,10 +115,11 @@ const Lead = () => {
       await getLeadtime(machinery, items, part1)
         .then((res)=>{
           //axios의 response인 Json에 key, value를 추가하는 법
-          res[0].order_date=order
-          setLead(res);
+          res.data.order_date=order
+          setLead(res.data);
+          console.log(res.data)
         })
-    })();
+    })()
   };
 
   const refDateIn= useRef();
@@ -135,8 +136,8 @@ const Lead = () => {
     <Container>
       <Row>
       <Col>
-        <label className="label" for="choice"> Order To </label>
-        <input className="input"></input>
+        {/* <label className="label" for="choice"> Order To </label>
+        <input className="input"></input> */}
         <label className="label" for="choice"> MACHINERY </label>
         <select id="choice" onChange={changeValue}>
           <option value={null}>=== 선택 ===</option>
@@ -151,8 +152,8 @@ const Lead = () => {
         </select>
         <label className="label" for="choice"> Order Date </label>
         <input type='date' className="input" ref={refDateIn} onChange={handleChange}/>
-        <label className="label" for="choice"> Qty </label>
-        <input className="input"></input>
+        {/* <label className="label" for="choice"> Qty </label>
+        <input className="input"></input> */}
       </Col>
       <Col>
         <Button variant="dark" className="butt" onClick={submitdata}>Submit</Button>

@@ -7,6 +7,7 @@ import lombok.Setter;
 @Setter
 public class LeadtimeSearchVO {
 
+	private int id;
 	private String baljucheo;
 	private String machinery;
 	private String items;	//청구 품목

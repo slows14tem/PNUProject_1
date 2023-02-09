@@ -4,7 +4,7 @@ import { defaultInstance } from './index'
 
 export const getSelectList = async () => {
   try{
-    const{ data } = await defaultInstance.get(
+    const data  = await defaultInstance.get(
       'selectlist',
     )
     return data
@@ -15,7 +15,7 @@ export const getSelectList = async () => {
 
 export const getLeadtime = async (machinery, items, part1) => {
   try{
-    const{ data } = await defaultInstance.get(
+    const data  = await defaultInstance.get(
       `leadtime?machinery=${machinery}&items=${items}&part1=${part1}`,
     )
     return data
@@ -26,7 +26,7 @@ export const getLeadtime = async (machinery, items, part1) => {
 
 export const getPastLeadtime = async (machinery, items, part1) => {
   try{
-    const{ data } = await defaultInstance.get(
+    const data  = await defaultInstance.get(
       `past_leadtime?machinery=${machinery}&items=${items}&part1=${part1}`,
     )
     return data
@@ -37,7 +37,7 @@ export const getPastLeadtime = async (machinery, items, part1) => {
 
 export const getAutoSearch = async () => {
   try{
-    const{ data } = await defaultInstance.get(
+    const data  = await defaultInstance.get(
       'search',
     )
     return data

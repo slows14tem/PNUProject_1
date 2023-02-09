@@ -10,9 +10,9 @@ function App() {
     <>
     <Navi/>
     <Routes>
-      <Route path='/' element={<Order/>} />
+      <Route path='/' element={<SelectMain/>} />
       <Route path='/Order' element={<OrderList/>} />
-      <Route path='/Select' element={<SelectMain/>} />
+      <Route path='/OrderMain' element={<Order/>} />
     </Routes>      
     </>
   );
