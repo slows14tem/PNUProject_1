@@ -12,7 +12,9 @@ function Navi(){
           <Navbar.Brand><img src = {logo}/></Navbar.Brand>
           <Nav className="me-auto">
             <Nav.Link href="/">Select</Nav.Link>
+            <Nav.Link href="/Log">Log</Nav.Link>
             <Nav.Link href="/OrderMain">Order</Nav.Link>
+            <Nav.Link href="/Order">OrderList</Nav.Link>
           </Nav>
         </Container>
       </Navbar>

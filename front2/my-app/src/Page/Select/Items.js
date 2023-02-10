@@ -48,7 +48,7 @@ const Lead = () => {
 
   useEffect(() => {
     const result3 = [...new Set(data3)];
-    result3.sort();
+    // result3.sort();
     for (let i = 0; i < result3.length; i++) {
       let opt = document.createElement("option");
       opt.value = result3[i];
@@ -122,9 +122,9 @@ const Lead = () => {
     e.preventDefault();
     (async () => {
       await getLeadtime(machinery, items, part1)
-        .then((res)=>{
+        .then((res) => {
           //axios의 response인 Json에 key, value를 추가하는 법
-          res.order_date=order
+          res.order_date = order
           setLead(res);
         })
     })();
@@ -136,7 +136,7 @@ const Lead = () => {
     })();
   };
 
-  const refDateIn= useRef();
+  const refDateIn = useRef();
 
   const handleChange = (e) => {
     e.preventDefault();
@@ -148,32 +148,32 @@ const Lead = () => {
   //reading 'leadtime_predicted' 에러 발생하는 이유 : 해당 품목을 leadtime_final에서 검색하면 데이터가 없음
   return (
     <>
-    <Container>
-      <Row>
-      <Col>
-        {/* <label className="label" for="choice"> Order To </label>
+      <Container>
+        <Row>
+          <Col>
+            {/* <label className="label" for="choice"> Order To </label>
         <input className="input"></input> */}
-        <label className="label" for="choice"> MACHINERY </label>
-        <select id="choice" onChange={changeValue}>
-          <option value={null}>=== 선택 ===</option>
-        </select>
-        <label className="label" for="choice2"> Description </label>
-        <select id="choice2" onChange={changeValue2}>
-          <option value={null}>=== 선택 ===</option>
-        </select>
-        <label className="label" for="choice3"> Part NO </label>
-        <select id="choice3" onChange={changeValue3}>
-          <option value={null}>=== 선택 ===</option>
-        </select>
-        <label className="label" for="choice"> Order Date </label>
-        <input type='date' className="input" ref={refDateIn} onChange={handleChange}/>
-        {/* <label className="label" for="choice"> Qty </label>
+            <label className="label" for="choice"> MACHINERY </label>
+            <select id="choice" onChange={changeValue}>
+              <option value={null}>=== 선택 ===</option>
+            </select>
+            <label className="label" for="choice2"> Description </label>
+            <select id="choice2" onChange={changeValue2}>
+              <option value={null}>=== 선택 ===</option>
+            </select>
+            <label className="label" for="choice3"> Part NO </label>
+            <select id="choice3" onChange={changeValue3}>
+              <option value={null}>=== 선택 ===</option>
+            </select>
+            <label className="label" for="choice"> Order Date </label>
+            <input type='date' className="input" ref={refDateIn} onChange={handleChange} />
+            {/* <label className="label" for="choice"> Qty </label>
         <input className="input"></input> */}
-      </Col>
-      <Col>
-        <Button variant="dark" className="butt" onClick={submitdata}>Submit</Button>
-      </Col>
-      </Row>
+          </Col>
+          <Col>
+            <Button variant="dark" className="butt" onClick={submitdata}>리드타임 검색</Button>
+          </Col>
+        </Row>
       </Container>
     </>
   );

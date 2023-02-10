@@ -26,17 +26,25 @@
   margin-bottom: 3px;
 }
 
-.autobutt2{
-  margin : auto;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
+/* .autobutt2{
+  margin-left: 50%;
+
+} */
 
 .th2{
   width: 10%;
 }
+.th3{
+  width: 0.8%;
+}
+.th4{
+  width: 4%;
+}
 
 .OrderTable{
   cursor: pointer;
+}
+
+.orderbutt{
+  margin-left: 50%;
 }

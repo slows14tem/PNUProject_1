@@ -6,7 +6,7 @@ import Button from 'react-bootstrap/Button';
 import "./Paging.css"
 import "./Autosearch.css"
 import { Link } from "react-router-dom";
-import { getAutoSearch, getSelectList } from "../../API/main";
+import { getAutoSearch, getSelectList, addBalju, sendBalju } from "../../API/main";
 
 //자동 검색 기능 및 검색결과 출력 화면
 const Autosearch = () => {
@@ -27,7 +27,7 @@ const Autosearch = () => {
         .then((res) => setDatas(res))
     })();
     //TypeError: (intermediate value)... => 함수와 함수사이에 ';' (세미콜론)이 빠지면 발생하는 에러
-    
+
     //검색결과 출력을 위한 row data(리드타임 예측 결과 테이블)
     (async () => {
       await getAutoSearch()
@@ -63,6 +63,9 @@ const Autosearch = () => {
   for (let item in data) {
     options.push(data[item]);
   }
+
+  //  options배열을 내림차순 정렬
+  options.sort();
 
   //검색창에 입력값이 변할때 발생하는 이벤트(입력)
   const handleChange = (event) => {
@@ -119,9 +122,56 @@ const Autosearch = () => {
   //   rowdata?.filter((item, index) => console.log(index))
   //   console.log(id)
   // }
+  const [checkItems, setCheckItems] = useState([]);
+  const [orderData, setOrderData] = useState([]);
+  // 체크박스 단일 선택
+  const handleSingleCheck = (checked, id) => {
+    if (checked) {
+      // 단일 선택 시 체크된 아이템을 배열에 추가
+      setCheckItems(prev => [...prev, id]);
+    } else {
+      // 단일 선택 해제 시 체크된 아이템을 제외한 배열 (필터)
+      setCheckItems(checkItems.filter((el) => el !== id));
+    }
+  };
+  // console.log(checkItems)
+
+  const handleAllCheck = (checked) => {
+    if (checked) {
+      // 전체 선택 클릭 시 데이터의 모든 아이템(id)를 담은 배열로 checkItems 상태 업데이트
+      const idArray = [];
+      rowdata.forEach((el) => idArray.push(el.id));
+      setCheckItems(idArray);
+    }
+    else {
+      // 전체 선택 해제 시 checkItems 를 빈 배열로 상태 업데이트
+      setCheckItems([]);
+    }
+  }
+
+  const removeRow = () => {
+    console.log(checkItems)
+    setRowdata(rowdata.filter((item) =>
+      !checkItems.includes(item.id)
+    ))
+  }
+
+  const baljuUp = () => {
+    const arr = []
+    orderData.map((item) => {
+      arr.push(item)
+    });
+    (async () => {
+      await sendBalju(arr)
+        .then((res) => res)
+    })();
+    // setCurrentPosts([])
+    // setRowdata([])
+  }
 
   return (
     <>
+      <h3>검색결과</h3>
       <div className="autosearch">
         <select onChange={handleSelect}>
           {selectList.map((item) => (
@@ -155,8 +205,8 @@ const Autosearch = () => {
             <th className="th2">카테고리</th>
             <th className="th2">발주처</th>
             <th className="th2">리드타임(day)</th>
-            <th className="th2">견적화폐</th>
-            <th className="th2">견적단가</th>
+            {/* <th className="th2">견적화폐</th>
+            <th className="th2">견적단가</th> */}
           </tr>
         </thead>
         <tbody className="OrderTable">
@@ -170,8 +220,8 @@ const Autosearch = () => {
                 <td>{item.key2}</td>
                 <td>{item.baljucheo}</td>
                 <td>{item.leadtime_predicted}</td>
-                <td>{item.gyeonjeokhwapye}</td>
-                <td>{item.gyeonjeokdanga}</td>
+                {/* <td>{item.gyeonjeokhwapye}</td>
+                <td>{item.gyeonjeokdanga}</td> */}
               </tr>
             )))
             : <tr><td>검색결과가 없습니다.</td></tr>
@@ -187,47 +237,79 @@ const Autosearch = () => {
         nextPageText={"›"} // "다음"을 나타낼 텍스트
         onChange={handlePageChange} // 페이지 변경을 핸들링하는 함수
       />
+      <br />
+      <h3>선택 청구품목</h3>
       <Table striped bordered hover>
         <thead>
           <tr>
-            {/* <th>#</th> */}
+            <th className="th3"><input type={'checkbox'} onChange={(e) => handleAllCheck(e.target.checked)}
+              checked={checkItems.length === rowdata.length ? true : false}></input></th>
             <th className="th2">Machinery</th>
             <th className="th2">청구품목</th>
             <th className="th2">Part.No</th>
             <th className="th2">카테고리</th>
             <th className="th2">발주처</th>
-            <th className="th2">리드타임</th>
+            <th className="th2">리드타임(day)</th>
             <th className="th2">견적화폐</th>
             <th className="th2">견적단가</th>
-            <th className="th2">수량</th>
+            <th className="th4">수량</th>
           </tr>
         </thead>
-        <tbody className="OrderTable">          
+        <tbody className="OrderTable">
           {rowdata.length > 0 ? (
-          rowdata?.map((item, index) => (
-            //테이블 클릭하여 저장된 정보를 새로운 테이블로 출력(장바구니 같은 개념으로 생각중)
-            //클릭하면 테이블에서 삭제
-            <tr key={index} onClick={() => setRowdata(rowdata.filter(ritem => ritem.id !== item.id))}>
-              <td>{item.machinery}</td>
-              <td>{item.items}</td>
-              <td>{item.part1}</td>
-              <td>{item.key2}</td>
-              <td>{item.baljucheo}</td>
-              <td>{item.leadtime_predicted}</td>
-              <td>{item.gyeonjeokhwapye}</td>
-              <td>{item.gyeonjeokdanga}</td>
-              {/* <td><input></input></td> */}
-            </tr>
-          )))
-          : <tr><td>선택한 품목이 없습니다.</td></tr>
-        }
+            rowdata?.map((item, index) => (
+              //테이블 클릭하여 저장된 정보를 새로운 테이블로 출력(장바구니 같은 개념으로 생각중)
+              //클릭하면 테이블에서 삭제
+              // <tr key={index} onClick={() => setRowdata(rowdata.filter(ritem => ritem.id !== item.id))}>
+              <tr key={index} >
+                <td><input type={'checkbox'} onChange={(e) => handleSingleCheck(e.target.checked, item.id)}
+                  checked={checkItems.includes(item.id) ? true : false}></input></td>
+                <td>{item.machinery}</td>
+                <td>{item.items}</td>
+                <td>{item.part1}</td>
+                <td>{item.key2}</td>
+                <td>{item.baljucheo}</td>
+                <td>{item.leadtime_predicted}</td>
+                <td>{item.gyeonjeokhwapye}</td>
+                <td>{item.gyeonjeokdanga}</td>
+                {/* db에 전송될 배열을 생성 */}
+                <td><input size='1' onChange={(event) => {
+                  const orderraw = {
+                    "id": item.id,
+                    "machinery": item.machinery,
+                    "items": item.items,
+                    "part1": item.part1,
+                    "key2": item.key2,
+                    "baljucheo": item.baljucheo,
+                    "leadtime_predicted": item.leadtime_predicted,
+                    "gyeonjeokhwapye": item.gyeonjeokhwapye,
+                    "gyeonjeokdanga": item.gyeonjeokdanga,
+                    "baljusuryang": event.target.value,
+                    "baljugeumaek": item.gyeonjeokdanga * event.target.value
+                  };
+                  setOrderData(orderData.filter(ritem => ritem.id !== item.id))
+                  setOrderData(orderData => [...orderData, orderraw]);
+                }}></input></td>
+              </tr>
+            )))
+            : <tr><td></td><td>선택한 품목이 없습니다.</td></tr>
+          }
         </tbody>
       </Table>
       {/* 선택되어 따로 생성된 테이블의 정보를 OrderList로 전송(장바구니 목록 결제하는 느낌)
-      #state를 사용하면 link를 이용해서도 props를 전송 */}
-      <Link to='/Order' state={rowdata}><Button variant="dark" className="autobutt2">발주</Button></Link>
+       */}
+      {checkItems.length > 0 && <Button variant="dark" className="autobutt2" onClick={removeRow}>선택 삭제</Button>}
+      <div className="orderbutt">
+      <Link to='/Order'><Button variant="dark" className="autobutt2" onClick={baljuUp}>발주</Button></Link>
+      </div>
     </>
   );
 };
 
 export default Autosearch;
+
+{/* <Link to='/Order' state={orderData}><Button variant="dark" className="autobutt2">발주</Button></Link> */}
+// #state를 사용하면 link를 이용해서도 props를 전송///
+//useLocation을 사용해 넘어온 router로 넘어온 props정보를 활용가능
+// const location = useLocation();
+// const [data, setData] = useState(location.state);

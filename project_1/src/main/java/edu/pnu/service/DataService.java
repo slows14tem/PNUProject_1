@@ -6,8 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import edu.pnu.dao.DataDao;
+import edu.pnu.domain.BaljuVO;
 import edu.pnu.domain.CategoryVO;
 import edu.pnu.domain.LeadtimeSearchVO;
+import edu.pnu.domain.LogVO;
 import edu.pnu.domain.LeadtimeResultVO;
 import edu.pnu.domain.PastLeadtimeVO;
 
@@ -33,8 +35,21 @@ public class DataService {
 		return dataDao.getSearch();
 	}
 
-	public void addLog(CategoryVO category) {
-		dataDao.addLog(category);
+	public void addLog(LogVO log) {
+		dataDao.addLog(log);
+	}
+
+	public List<LogVO> getLog() {
+		return dataDao.getLog();
+	}
+
+	public void addBalju(BaljuVO[] balju) {
+		dataDao.addBalju(balju);
+		
+	}
+
+	public List<BaljuVO> getBalju() {
+		return dataDao.getBalju();
 	}
 
 

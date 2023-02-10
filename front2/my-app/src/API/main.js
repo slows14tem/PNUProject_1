@@ -49,11 +49,45 @@ export const getAutoSearch = async () => {
 export const addLog = async (logInfo) => {
   try {
     const { data } = await defaultInstance.post(
-        `/searchlog`, 
+        "searchlog",
         logInfo
       )
     return data
   } catch (error) {
     console.error(error)
+  }
+}
+
+export const getLog = async () => {
+  try{
+    const {data}  = await defaultInstance.get(
+      'getlog',
+    )
+    return data
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+export const sendBalju = async (arr) => {
+  try {
+    const { data } = await defaultInstance.post(
+        "balju",
+        arr
+      )
+    return data
+  } catch (error) {
+    console.error(error)
+  }
+}
+
+export const getBalju = async () => {
+  try{
+    const {data}  = await defaultInstance.get(
+      'baljulist',
+    )
+    return data
+  } catch (error) {
+    console.log(error)
   }
 }
