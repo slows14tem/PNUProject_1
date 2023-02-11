@@ -1,10 +1,34 @@
+.SearchOrder{
+  width: 80%;
+  margin : 0 auto;
+  align-items: center;
+}
+
 .autosearch{
   display: flex;
   flex-direction: row;
 }
 
+.orderSelect{
+  width: 20%;
+  font-family: "Noto Sansf KR", sans-serif;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+  display: flex;
+  color: rgb(0, 0, 0);
+  background-color: #fff;
+
+  padding: 0.6em 1.4em 0.5em 0.8em;
+
+  border: 1px solid #aaa;
+  border-radius: 0.5em;
+  box-shadow: 0 1px 0 1px rgba(0, 0, 0, 0.04);
+}
+
 .autoinput{
   width: 400px;
+  height: 100%;
   font-family: "Noto Sansf KR", sans-serif;
   font-size: 1rem;
   font-weight: 400;
@@ -22,14 +46,14 @@
 
 .autobutt{
   width: 80px;
-  height: 42px;
+  height: 100%;
   margin-bottom: 3px;
 }
 
-/* .autobutt2{
-  margin-left: 50%;
+.autobutt2{
+  width: 100px;
 
-} */
+}
 
 .th2{
   width: 10%;
@@ -46,5 +70,5 @@
 }
 
 .orderbutt{
-  margin-left: 50%;
+  margin-left: 47%;
 }

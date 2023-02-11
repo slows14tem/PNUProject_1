@@ -2,6 +2,7 @@ import React, { useState, useContext, useEffect } from "react";
 import { ResponsiveBar } from "@nivo/bar";
 import Table from 'react-bootstrap/Table';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import './Visual.css'
 
 function Barchart(props) {
 
@@ -16,6 +17,8 @@ function Barchart(props) {
   };
   return (
     <>
+    {/* <div>{props?.['props'][0]['machinery']} {props?.['props'][0]['items']} {props?.['props'][0]['part1']}</div> */}
+    <h5 className="visualtitle">{props?.['props'][0]['items']} 의 과거 발주 정보</h5><br/>
     <Table striped bordered hover>
       <thead>
         <tr>
@@ -25,12 +28,12 @@ function Barchart(props) {
           <th>발주금액</th>
           <th>견적단가</th>
           <th>견적화폐</th>          
-          <th>리드타임</th>
+          <th>리드타임(day)</th>
         </tr>
       </thead>
       <tbody>
-        {props?.['props'].map((item) => (
-          <tr key={item.machinery+item.items}>
+        {props?.['props'].map((item, index) => (
+          <tr key={index}>
             <td>{item.balju}</td>
             <td>{item.baljucheo}</td>
             <td>{item.baljusuryang}</td>

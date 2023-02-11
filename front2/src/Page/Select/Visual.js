@@ -37,7 +37,7 @@ function Visual(props){
 
   return(
     <>
-      <Button className='butt2' variant="dark" onClick={() => setModalIsOpen(true)}>시각화</Button>
+      <Button className='butt2' variant="dark" onClick={() => setModalIsOpen(true)}>기록</Button>
 	    <Modal isOpen={modalIsOpen} 
         onRequestClose={() => setModalIsOpen(false)} 
         ariaHideApp={false} 

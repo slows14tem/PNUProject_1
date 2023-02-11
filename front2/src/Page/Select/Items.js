@@ -149,8 +149,6 @@ const Lead = () => {
   return (
     <>
       <Container>
-        <Row>
-          <Col>
             {/* <label className="label" for="choice"> Order To </label>
         <input className="input"></input> */}
             <label className="label" for="choice"> MACHINERY </label>
@@ -169,11 +167,7 @@ const Lead = () => {
             <input type='date' className="input" ref={refDateIn} onChange={handleChange} />
             {/* <label className="label" for="choice"> Qty </label>
         <input className="input"></input> */}
-          </Col>
-          <Col>
-            <Button variant="dark" className="butt" onClick={submitdata}>리드타임 검색</Button>
-          </Col>
-        </Row>
+        <Button variant="dark" className="butt" onClick={submitdata}>검색</Button>
       </Container>
     </>
   );

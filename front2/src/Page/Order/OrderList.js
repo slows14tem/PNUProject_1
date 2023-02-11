@@ -1,17 +1,17 @@
 import Table from 'react-bootstrap/Table';
 import Button from 'react-bootstrap/Button';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { useLocation } from 'react-router';
 import React, { useState, useEffect } from "react";
-import "./Autosearch.css"
+import "./OrderList.css"
 import { Link } from "react-router-dom";
 import { getBalju } from "../../API/main";
 
 //선택된 청구품목 목록을 따로 출력
 function OrderList() {
 
-  let location = useLocation();
   const [baljuData, setBaljuData] = useState();
+
+  //db에 저장된 검색 데이터를 호출
   useEffect(() => {
 
     (async () => {
@@ -19,7 +19,6 @@ function OrderList() {
         .then((res) => setBaljuData(res))
     })();
   }, [])
-  console.log(baljuData)
 
   const [checkItems, setCheckItems] = useState([]);
 
@@ -33,7 +32,6 @@ function OrderList() {
       setCheckItems(checkItems.filter((el) => el !== id));
     }
   };
-  console.log(checkItems)
 
   const handleAllCheck = (checked) => {
     if (checked) {
@@ -56,8 +54,8 @@ function OrderList() {
 
   return (
     <>
-      <h3>OrderList</h3>
-      <div>
+      <div className='orderlist'>
+        <h3>OrderList</h3>
         <Table striped bordered hover>
           <thead>
             <tr>
@@ -72,6 +70,7 @@ function OrderList() {
               <th>견적화폐</th>
               <th>견적단가</th>
               <th>수량</th>
+              <th>발주금액</th>
             </tr>
           </thead>
           <tbody >
@@ -88,12 +87,13 @@ function OrderList() {
                 <td>{item.gyeonjeokhwapye}</td>
                 <td>{item.gyeonjeokdanga}</td>
                 <td>{item.baljusuryang}</td>
+                <td>{item.baljugeumaek}</td>
               </tr>
             ))}
           </tbody>
         </Table>
-        <div className='orderlistbutt'>
-          <Link to='/OrderMain'><Button variant="dark" className="autobutt2">뒤로가기</Button></Link>
+        <div className="backbutt">
+          <Link to='/OrderMain'><Button variant="dark" >뒤로가기</Button></Link>
           {/* <Button variant="dark" className="autobutt2" onClick={removeRow}>선택 삭제</Button> */}
         </div>
       </div>

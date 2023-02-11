@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { getLog } from "../../API/main";
 import Table from 'react-bootstrap/Table';
+import "./Log.css"
 
 function Log() {
 
@@ -18,8 +19,9 @@ function Log() {
 
   return (
     <>
+    <div className="logtable">
       <h3>리드타임 검색 기록</h3>
-      <Table striped bordered hover>
+      <Table striped bordered hover >
         <thead>
           <tr>
             <th>#</th>
@@ -44,6 +46,7 @@ function Log() {
           }       
         </tbody>
       </Table>
+      </div>
     </>
   )
 }

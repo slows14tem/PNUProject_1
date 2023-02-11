@@ -5,7 +5,7 @@
 }
 
 select {
-  width: 400px;
+  width: 100%;
   font-family: "Noto Sansf KR", sans-serif;
   font-size: 1rem;
   font-weight: 400;
@@ -23,7 +23,7 @@ select {
 }
 
 .input{
-  width: 400px;
+  width: 100%;
   font-family: "Noto Sansf KR", sans-serif;
   font-size: 1rem;
   font-weight: 400;
@@ -56,18 +56,14 @@ select:disabled {
   opacity: 0.5;
 }
 
-.filedBox {
-  width: 80vw;
-  margin: 30px;
-}
-
 .label{
   margin-top: 15px;
 }
 
 .butt{
-  height: 100%;
-  margin-left: 5px;
-  /* margin-top: 15px;
-  margin-left: 160px; */
+  margin-top: 20px;
+  margin-bottom: 10px;
+  margin-left: 35%;
+  width: 100px;
+
 }

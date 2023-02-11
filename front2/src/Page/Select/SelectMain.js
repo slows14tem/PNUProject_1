@@ -4,7 +4,6 @@ import Calendar from "react-calendar";
 import moment from "moment";
 import Items from "./Items";
 import Visual from "./Visual";
-import "react-datepicker/dist/react-datepicker.css";
 import "./selectMain.css";
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
@@ -18,11 +17,18 @@ function SelectDate() {
 
   const [lead, setLead] = useState();
   const [startDate, setStartDate] = useState();
-  const [visible, setVisible] = useState(true);
+  const [visible, setVisible] = useState(false);
+
   useEffect(()=>{
+    if (lead === undefined){
+      setVisible(false)
+    }
+    else {
+      if (visible === false){setVisible(true)}
+      else setVisible(true)  
+    }
     setStartDate(lead?.[0]["order_date"])
-    setVisible(!visible) 
-    
+              
   },[lead])
 
   const d1 = [];
@@ -40,29 +46,18 @@ function SelectDate() {
     <AppContext.Provider value={[lead, setLead]}>
     <Container>
       <Row>
-        <Col><Items /></Col>
-        <Col>
+        <Col xs={4} className="colLeft"><Items /></Col>
+        <Col className="colRight">
         <Calendar
           value={moment(startDate).add(lead?.[0]["leadtime_predicted"], 'days')['_d']}
           locale="en-EN"
-          // tileClassName={({ date, view }) => {
-          //   if (
-          //     d1.find(
-          //       (x) =>
-          //         moment(x).format("DD-MM-YYYY") ===
-          //         moment(date).format("DD-MM-YYYY")
-          //     )
-          //   ) {
-          //     // d1 안의 날짜 하이라이트
-          //     return "highlight";
-          //   }
-          // }}
+          className="calendar"
         />
         <br/>
         {visible && <div>
+          {lead?.[0]["machinery"]} / {lead?.[0]["items"]} / {lead?.[0]["part1"]}의<br/>
           예상 리드타임은 {`${y}year ${m}month ${d2}day`} 입니다.<br/>
-          발주일이 {moment(a).format("YYYY년 MM월 DD일")}이라면 <br/>
-          {moment(startDate).add(b, "days").format("YYYY년 MM월 DD일")}에 입고예정입니다.
+          발주일이 {moment(a).format("YYYY년 MM월 DD일")}이라면 {moment(startDate).add(b, "days").format("YYYY년 MM월 DD일")}에 입고예정입니다.
         </div>}
         
         <Visual props={lead} />
@@ -72,16 +67,14 @@ function SelectDate() {
         <Col>
         <div className="top">
         · 리드타임 예측 서비스입니다. <br/><br/>
-        · Order To - 발주처를 입력하십시오.<br/>
         · MACHINERY - 부품 대분류를 선택하십시오.<br/>
         · Description - 부품을 선택하십시오.<br/>
         · Part NO - 부품 번호를 선택하십시오.<br/>
         · Order Date - 주문 예상일자를 입력하십시오.<br/>
-        · Qty - 주문 수량을 입력하십시오.<br/><br/>
         </div>
         <font color = "gray">
-        · submit 버튼을 클릭하시면 도착예상일자를 조회하실 수 있습니다.<br/>
-        · 시각화 버튼을 클릭하시면 과거 도착 이력을 그래프로 조회하실 수 있습니다.
+        · 검색 버튼을 클릭하시면 해당 품목의 도착예상일자를 조회하실 수 있습니다.<br/>
+        · 과거 기록 버튼을 클릭하시면 과거 리드타임 이력을 조회하실 수 있습니다.
         </font>
         </Col>
       </Row>

@@ -15,12 +15,17 @@
   padding-top: 20px;
 }
 
-.left{
-  width: 40%;
-  float: left;
+.colLeft, .colRight{
+  border: 1px solid;
+  border-radius: 5px;
+  margin: 10px;
+  padding: 10px;
+  background: white;
+  color: #2b2a2b;
 }
 
-.right{
-  width: 60%;
-  float: right;
+
+
+.calendar{
+  width: 100%;
 }

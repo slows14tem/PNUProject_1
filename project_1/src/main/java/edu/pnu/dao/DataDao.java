@@ -62,7 +62,6 @@ public class DataDao {
 				+ "VALUES (?,?,?)";
 		try {
 			jdbcTemplate.update(sql, log.getMachinery(), log.getItems(), log.getPart1());
-			System.out.println(log.getMachinery() + log.getItems() + log.getPart1());
 		} catch(Exception e) {
 			e.printStackTrace();
 		}		
