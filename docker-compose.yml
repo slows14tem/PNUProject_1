@@ -4,7 +4,7 @@ services:
   react:
     image: 'upcoder/react-image'
     build:
-      context: .
+      context: front2
       dockerfile: Dockerfile
     ports:
       - '3000:3000'
@@ -12,7 +12,7 @@ services:
   spring:
     image: 'upcoder/myapp'
     build:
-      context: .
+      context: project_1
       dockerfile: Dockerfile
     ports:
       - '8080:8080'
