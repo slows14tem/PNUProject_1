@@ -2,19 +2,19 @@ version: '3'
 
 services:
   react:
-    image: react-image
+    image: upcoder/react-image
     volumes:
       - ./front2:/app
     build:
-      context: ./front2
-      dockerfile: ./front2/Dockerfile
+      context: .
+      dockerfile: Dockerfile
     ports:
       - 3000:3000
 
   spring:
-    image: myorg/myapp
+    image: upcoder/myapp
     build:
-      context: ./project_1
-      dockerfile: ./project_1/Dockerfile
+      context: .
+      dockerfile: Dockerfile
     ports:
       - 8080:8080
