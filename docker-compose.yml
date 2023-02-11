@@ -7,7 +7,7 @@ services:
       - ./front2:/app
     build:
       context: ./front2
-      dockerfile: ./front2/dockerfile    
+      dockerfile: ./front2
     ports:
       - 3000:3000
 
