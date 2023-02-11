@@ -1,0 +1,60 @@
+# flyctl launch added from front2\.gitignore
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+
+# dependencies
+front2\node_modules
+front2\.pnp
+front2\**\.pnp.js
+
+# testing
+front2\coverage
+
+# production
+front2\build
+
+# misc
+front2\**\.DS_Store
+front2\**\.env.local
+front2\**\.env.development.local
+front2\**\.env.test.local
+front2\**\.env.production.local
+
+front2\**\npm-debug.log*
+front2\**\yarn-debug.log*
+front2\**\yarn-error.log*
+
+# flyctl launch added from project_1\.gitignore
+project_1\**\HELP.md
+project_1\**\target
+!project_1\**\.mvn\wrapper\maven-wrapper.jar
+!project_1\**\**\src\main\**\target
+!project_1\**\**\src\test\**\target
+
+### STS ###
+project_1\**\.apt_generated
+project_1\**\.classpath
+project_1\**\.factorypath
+project_1\**\.project
+project_1\**\.settings
+project_1\**\.springBeans
+project_1\**\.sts4-cache
+
+### IntelliJ IDEA ###
+project_1\**\.idea
+project_1\**\*.iws
+project_1\**\*.iml
+project_1\**\*.ipr
+
+### NetBeans ###
+project_1\nbproject\private
+project_1\nbbuild
+project_1\dist
+project_1\nbdist
+project_1\.nb-gradle
+project_1\**\build
+!project_1\**\**\src\main\**\build
+!project_1\**\**\src\test\**\build
+
+### VS Code ###
+project_1\**\.vscode
+fly.toml

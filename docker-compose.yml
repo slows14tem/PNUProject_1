@@ -1,0 +1,20 @@
+version: '3'
+
+services:
+  react:
+    image: react-image
+    volumes:
+      - ./front2:/app
+    build:
+      context: ./front2
+      dockerfile: ./front2/dockerfile    
+    ports:
+      - 3000:3000
+
+  spring:
+    image: myorg/myapp
+    build:
+      context: ./project_1
+      dockerfile: ./project_1/dockerfile    
+    ports:
+      - 8080:8080
