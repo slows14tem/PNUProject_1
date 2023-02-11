@@ -7,7 +7,7 @@ services:
       - ./front2:/app
     build:
       context: ./front2
-      dockerfile: ./front2
+      dockerfile: ./front2/Dockerfile
     ports:
       - 3000:3000
 
@@ -15,6 +15,6 @@ services:
     image: myorg/myapp
     build:
       context: ./project_1
-      dockerfile: ./project_1/dockerfile    
+      dockerfile: ./project_1/Dockerfile
     ports:
       - 8080:8080
