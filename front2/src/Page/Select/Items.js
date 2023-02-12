@@ -7,7 +7,7 @@ import Col from 'react-bootstrap/Col';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Button from 'react-bootstrap/Button';
 import "./Items.css";
-import { getLeadtime, addLog } from "../../API/main";
+import { getLeadtime, addLog, getSelectList } from "../../API/main";
 
 const Lead = () => {
   const [datas, setdata] = useState();
