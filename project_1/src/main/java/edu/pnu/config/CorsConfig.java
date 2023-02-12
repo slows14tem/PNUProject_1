@@ -6,16 +6,15 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Configuration
-@EnableWebMvc
 public class CorsConfig implements WebMvcConfigurer {
 
 	@Override
 	public void addCorsMappings(CorsRegistry registry) {
 		registry.addMapping("/**")
-			.allowedOrigins("http://3.35.179.46:8080", "http://3.35.179.46:3000")
-			.allowedMethods("OPTIONS", "GET", "POST", "PUT", "DELETE")
-//			.allowCredentials(true);
+			.allowedOrigins("http://localhost:3000", "http://3.35.179.46:3000")
+			.allowedMethods("OPTIONS", "GET", "POST", "PUT", "DELETE");
 	}
+	
 }
 
 //한 웹 어플리케이션이 다른 출처에 존재하는 자원에 접근하고 싶다면? 

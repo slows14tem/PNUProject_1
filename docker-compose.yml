@@ -5,14 +5,18 @@ services:
     image: 'upcoderk/react-image'
     build:
       context: front2
-      dockerfile: Dockerfile
+      dockerfile: Dockerfile    
     ports:
-      - '3000:3000'
+      - 3000:3000
 
   spring:
     image: 'upcoderk/myapp'
     build:
       context: project_1
       dockerfile: Dockerfile
+    command:
+      - run
+      - cors 
+      - "*"
     ports:
-      - '8080:8080'
+      - 8080:8080
