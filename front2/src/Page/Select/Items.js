@@ -58,16 +58,23 @@ const Lead = () => {
   }, [data3]);
 
   const getMachinery = async () => {
-    let url = "http://3.35.179.46:8080/data/selectlist";
+    // let url = "http://3.35.179.46:8080/data/selectlist";
 
-    try {
-      const resp = await fetch(url);
-      const data = await resp.json();
-      setdata(data);
-      setdata1(data.map((item) => item.machinery));
-    } catch (err) {
-      console.log(err);
-    }
+    // try {
+    //   const resp = await fetch(url);
+    //   const data = await resp.json();
+    //   setdata(data);
+    //   setdata1(data.map((item) => item.machinery));
+    // } catch (err) {
+    //   console.log(err);
+    // }
+    (async () => {
+      await getSelectList()
+        .then((res) => {
+          setdata(res);
+          setdata1(res.map((item) => item.machinery));
+        })
+    })();
   };
 
   //리스트를 select box의 option으로
