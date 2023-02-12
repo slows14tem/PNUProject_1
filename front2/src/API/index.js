@@ -9,9 +9,10 @@ const BASE_URL = "http://3.35.179.46:8080/data/"
 
 const axiosAPI = (url, options) => {
   const instance = axios.create({ baseURL: url, ...options })
+  instance.defaults.withCredentials = true;
+  instance.defaults.headers = "http://3.35.179.46:3000";
+
   return instance
 }
-instance.defaults.withCredentials = true;
-instance.defaults.headers = "http://3.35.179.46:3000";
 
 export const defaultInstance = axiosAPI(BASE_URL)
