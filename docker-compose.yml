@@ -6,10 +6,10 @@ services:
     build:
       context: front2
       dockerfile: Dockerfile
-    command:
-      - run
-      - cors 
-      - "*"
+    # command:
+    #   - run
+    #   - cors 
+    #   - "*"
     ports:
       - 3000:3000
 
@@ -18,9 +18,9 @@ services:
     build:
       context: project_1
       dockerfile: Dockerfile
-    # command:
-    #   - run
-    #   - cors 
-    #   - "*"
+    command:
+      - run
+      - cors 
+      - "*"
     ports:
       - 8080:8080
