@@ -9,6 +9,13 @@ services:
       dockerfile: Dockerfile
     ports:
       - 3000:3000
+    entrypoint:
+      - elasticsearch
+      - -Ehttp.port=8080
+      - -Ehttp.cors.enabled=true
+      - -Ehttp.cors.allow-origin=xxx
+      - -Ehttp.cors.allow-headers=Content-Type,Content-Length,Authorization
+      - -Ehttp.cors.allow-credentials=true
     networks: 
       - react
       - spring
