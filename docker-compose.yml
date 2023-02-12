@@ -29,5 +29,5 @@ services:
       - spring
 
 networks: 
-  frontend:
-  backend:
+  react:
+  spring:
