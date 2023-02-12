@@ -59,7 +59,7 @@ public class DataController {
 		dataservice.addBalju(balju);
 	}
 	
-	@GetMapping("data/baljulist")
+	@GetMapping("/data/baljulist")
 	public List<BaljuVO> getBalju(){
 		return dataservice.getBalju();
 	}
