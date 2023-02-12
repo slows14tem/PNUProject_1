@@ -4,7 +4,7 @@ import axios from 'axios'
 // const BASE_URL = "http://localhost:8080/data/"
 const BASE_URL = "http://3.35.179.46:8080/data/"
 axios.defaults.withCredentials = true;
-axios.defaults.headers.origins = { 'Access-Control-Allow-Origin': '*'}
+axios.defaults.headers.common["Access-Control-Allow-Origin"] = "http://3.35.179.46:3000";
 
 
 const axiosAPI = (url, options) => {
