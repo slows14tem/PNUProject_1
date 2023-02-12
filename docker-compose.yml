@@ -5,7 +5,11 @@ services:
     image: 'upcoderk/react-image'
     build:
       context: front2
-      dockerfile: Dockerfile    
+      dockerfile: Dockerfile
+    command:
+      - run
+      - cors 
+      - "*"
     ports:
       - 3000:3000
 
