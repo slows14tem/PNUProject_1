@@ -7,7 +7,6 @@ services:
       context: front2
       dockerfile: Dockerfile
     command:
-      - run
       - --cors 
       - "*"
     ports:
