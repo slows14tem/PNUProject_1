@@ -4,7 +4,6 @@ import axios from 'axios'
 // const BASE_URL = "http://localhost:8080/data/"
 const BASE_URL = "http://3.35.179.46:8080/data/"
 const header = {
-  'Content-Type': 'application/json',
   'Access-Control-Allow-Origin': 'http://3.35.179.46:3000'
 }
 
