@@ -8,14 +8,6 @@ import Navi from "./component/Navi"
 
 function App() {
 
-  const express = require('express')
-  const cors = require('cors');
-   
-  const app = express();
-   
-  app.use(cors({
-      origin: 'http://3.35.179.46:8080"', // 모든 출처 허용 옵션 = *, true 를 써도 된다.
-  }));
   return (
     <>
     <header>
