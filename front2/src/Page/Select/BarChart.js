@@ -6,15 +6,15 @@ import './Visual.css'
 
 function Barchart(props) {
 
-  const handle = {
-    barClick: (data: any) => {
-      console.log(data);
-    },
+  // const handle = {
+  //   barClick: (data: any) => {
+  //     console.log(data);
+  //   },
 
-    legendClick: (data: any) => {
-      console.log(data);
-    },
-  };
+  //   legendClick: (data: any) => {
+  //     console.log(data);
+  //   },
+  // };
   return (
     <>
     {/* <div>{props?.['props'][0]['machinery']} {props?.['props'][0]['items']} {props?.['props'][0]['part1']}</div> */}
@@ -161,7 +161,7 @@ function Barchart(props) {
         /**
          * bar 클릭 이벤트
          */
-        onClick={handle.barClick}
+        // onClick={handle.barClick}
         /**
          * legend 설정 (default로 우측 하단에 있는 색상별 key 표시)
          */
@@ -188,7 +188,7 @@ function Barchart(props) {
                 },
               },
             ],
-            onClick: handle.legendClick, // legend 클릭 이벤트
+            // onClick: handle.legendClick, // legend 클릭 이벤트
           },
         ]}
       />
