@@ -30,17 +30,17 @@ public class DataService {
 	public List<PastLeadtimeVO> getPastLeadtime(PastLeadtimeVO original){
 		return dataDao.PastLeadtime(original);
 	}
-
-	public List<LeadtimeSearchVO> getSearch() {
-		return dataDao.getSearch();
-	}
-
+	
 	public void addLog(LogVO log) {
 		dataDao.addLog(log);
 	}
 
 	public List<LogVO> getLog() {
 		return dataDao.getLog();
+	}
+
+	public List<LeadtimeSearchVO> getSearch() {
+		return dataDao.getSearch();
 	}
 
 	public void addBalju(BaljuVO[] balju) {

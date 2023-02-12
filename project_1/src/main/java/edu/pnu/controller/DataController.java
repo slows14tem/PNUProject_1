@@ -22,43 +22,50 @@ public class DataController {
 	@Autowired
 	private DataService dataservice;
 	
-
+	//검색기능 구현을 위한 데이터 출력
 	@GetMapping("/data/selectlist")
 	public List<CategoryVO> getSelectList(){
 		return dataservice.getSelectList();
 	}
-
+	
+	//리드타임 예측 결과 출력(select page)
 	@GetMapping("/data/leadtime")
 	public List<LeadtimeResultVO> getLeadtime(LeadtimeResultVO leadResult){
 		return dataservice.getLeadtime(leadResult);
 	}
 	
+	//과거의 리드타임 정보 출력(visual page)
 	@GetMapping("/data/past_leadtime")
 	public List<PastLeadtimeVO> getPastLeadtime(PastLeadtimeVO original){
 		return dataservice.getPastLeadtime(original);
 	}
 	
-	@GetMapping("/data/search")
-	public List<LeadtimeSearchVO> getSearch(){
-		return dataservice.getSearch();
-	}
-	
+	//리드타임 예측 검색 log 저장
 	@PostMapping("/data/searchlog")
 	public void addLog(@RequestBody LogVO log) {
 		dataservice.addLog(log);
 	}
 	
+	//리드타임 예측 검색 log 출력
 	@GetMapping("/data/getlog")
 	public List<LogVO> getLog(){
 		return dataservice.getLog();
 	}
 	
+	//자동완성 검색결과 출력(Order page)
+	@GetMapping("/data/search")
+	public List<LeadtimeSearchVO> getSearch(){
+		return dataservice.getSearch();
+	}
+	
+	//겸색결과중 선택된 리스트를 저장
 	@PostMapping("/data/balju")
 	public void addBalju(@RequestBody BaljuVO[] balju) {
 		//@requestbody로 오는 데이터가 row하나가 아니기 때문에 []를 넣어서 배열로 선언한 것.(DAO확인)
 		dataservice.addBalju(balju);
 	}
 	
+	//저장된 리스트 출력
 	@GetMapping("/data/baljulist")
 	public List<BaljuVO> getBalju(){
 		return dataservice.getBalju();

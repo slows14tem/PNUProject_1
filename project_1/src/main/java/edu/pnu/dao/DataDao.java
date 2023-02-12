@@ -45,18 +45,7 @@ public class DataDao {
 				new BeanPropertyRowMapper<LeadtimeResultVO>(LeadtimeResultVO.class));
 		return list;
 	}
-
-	public List<PastLeadtimeVO> PastLeadtime(PastLeadtimeVO original) {
-		String sql = "SELECT * "
-				+ "FROM original "
-				+ "WHERE machinery = '%s' and items = '%s' and part1 = '%s' "
-				+ "GROUP BY balju";
-		String sqlString = String.format(sql, original.getMachinery(), original.getItems(), original.getPart1());
-		List<PastLeadtimeVO> list = jdbcTemplate.query(sqlString, 
-				new BeanPropertyRowMapper<PastLeadtimeVO>(PastLeadtimeVO.class));
-		return list;
-	}
-
+	
 	public void addLog(LogVO log) {
 		String sql = "INSERT INTO search_log (machinery, items, part1) "
 				+ "VALUES (?,?,?)";
@@ -73,6 +62,17 @@ public class DataDao {
 				+ "FROM search_log";
 		List<LogVO> list = jdbcTemplate.query(sql, 
 				new BeanPropertyRowMapper<LogVO>(LogVO.class));
+		return list;
+	}
+
+	public List<PastLeadtimeVO> PastLeadtime(PastLeadtimeVO original) {
+		String sql = "SELECT * "
+				+ "FROM original "
+				+ "WHERE machinery = '%s' and items = '%s' and part1 = '%s' "
+				+ "GROUP BY balju";
+		String sqlString = String.format(sql, original.getMachinery(), original.getItems(), original.getPart1());
+		List<PastLeadtimeVO> list = jdbcTemplate.query(sqlString, 
+				new BeanPropertyRowMapper<PastLeadtimeVO>(PastLeadtimeVO.class));
 		return list;
 	}
 
