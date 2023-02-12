@@ -10,7 +10,7 @@ services:
     ports:
       - 3000:3000
     entrypoint:
-      - elasticsearch
+      - react
       - -Ehttp.port=8080
       - -Ehttp.cors.enabled=true
       - -Ehttp.cors.allow-origin=xxx
