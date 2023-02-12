@@ -58,7 +58,7 @@ const Lead = () => {
   }, [data3]);
 
   const getMachinery = async () => {
-    let url = "http://localhost:8080/data/selectlist";
+    let url = "http://3.35.179.46:8080/data/selectlist";
 
     try {
       const resp = await fetch(url);
