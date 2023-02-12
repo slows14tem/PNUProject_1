@@ -8,6 +8,9 @@ services:
       dockerfile: Dockerfile
     ports:
       - 3000:3000
+    networks: 
+      - react
+      - spring
 
   spring:
     image: 'upcoderk/myapp'
@@ -20,3 +23,9 @@ services:
     #   - "*"
     ports:
       - 8080:8080
+    networks: 
+      - spring
+
+networks: 
+  frontend:
+  backend:
