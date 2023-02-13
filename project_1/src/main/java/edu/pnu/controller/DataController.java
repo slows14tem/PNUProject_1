@@ -52,13 +52,13 @@ public class DataController {
 		return dataservice.getLog();
 	}
 	
-	//자동완성 검색결과 출력(Order page)
+	//검색결과 출력(Order page)
 	@GetMapping("/data/search")
 	public List<LeadtimeSearchVO> getSearch(){
 		return dataservice.getSearch();
 	}
 	
-	//겸색결과중 선택된 리스트를 저장
+	//겸색 결과 중 선택된 리스트를 저장
 	@PostMapping("/data/balju")
 	public void addBalju(@RequestBody BaljuVO[] balju) {
 		//@requestbody로 오는 데이터가 row하나가 아니기 때문에 []를 넣어서 배열로 선언한 것.(DAO확인)

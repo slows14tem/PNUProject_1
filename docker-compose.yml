@@ -9,16 +9,9 @@ services:
       dockerfile: Dockerfile
     ports:
       - 3000:3000
-    environment:
-      - http.host=0.0.0.0
-      - http.port=3000
-      - "http.cors.allow-origin=http://3.35.179.46:8080"
-      - "http.cors.enabled=true"
-      - "http.cors.allow-headers=X-Requested-With,X-Auth-Token,Content-Type,Content-Length,Authorization,XMLHttpRequest"
-      - "http.cors.allow-credentials=true"
-    networks: 
-      - react
-      - spring
+    # networks: 
+    #   - react
+    #   - spring
 
   spring:
     container_name: spring
@@ -32,9 +25,9 @@ services:
     #   - "*"
     ports:
       - 8080:8080
-    networks: 
-      - spring
+#     networks: 
+#       - spring
 
-networks: 
-  react:
-  spring:
+# networks: 
+#   react:
+#   spring:
